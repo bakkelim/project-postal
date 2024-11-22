@@ -1,0 +1,21 @@
+---
+name: Lint and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  static-checks:
+    name: Static checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v4
+      - name: GDScript toolkit
+        uses: Scony/godot-gdscript-toolkit@master
+      - name: Format check
+        run: gdformat --check .
+      - name: Lint check
+        run: gdlint .
