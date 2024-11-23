@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwaimk52pikyg"]
+
+[ext_resource type="Script" path="res://scenes/components/produce_mail_component/produce_mail_component.gd" id="1_dcfwp"]
+
+[node name="ProduceMailComponent" type="Node2D"]
+z_index = 1
+script = ExtResource("1_dcfwp")
+
+[node name="ProduceTimer" type="Timer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(100, 10)
+offset_left = -50.0
+offset_top = 32.0
+offset_right = 50.0
+offset_bottom = 59.0
+value = 50.0

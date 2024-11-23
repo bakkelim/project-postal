@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp56vfnhiyypd"]
+
+[ext_resource type="Script" path="res://scenes/objects/house/house.gd" id="1_w4lp1"]
+[ext_resource type="PackedScene" uid="uid://cwaimk52pikyg" path="res://scenes/components/produce_mail_component/produce_mail_component.tscn" id="2_f8yqq"]
+[ext_resource type="Texture2D" uid="uid://bwtm34vltctw" path="res://icon.svg" id="2_f50h4"]
+
+[node name="House" type="Node2D"]
+script = ExtResource("1_w4lp1")
+
+[node name="ProduceMailComponent" parent="." instance=ExtResource("2_f8yqq")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_f50h4")
