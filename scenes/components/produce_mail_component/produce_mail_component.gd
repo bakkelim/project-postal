@@ -1,13 +1,13 @@
 class_name ProduceMailComponent
-extends Node2D
+extends Node
 
 signal mail_produced
 
 @export var min_produce_time: float = 0.5
 @export var max_produce_time: float = 2.0
+@export var progress_bar: ProgressBar
 
-@onready var produce_timer: Timer = $ProduceTimer
-@onready var progress_bar: ProgressBar = $ProgressBar
+@onready var produce_timer: Timer = $ProduceMailTimer
 
 
 func _ready() -> void:
