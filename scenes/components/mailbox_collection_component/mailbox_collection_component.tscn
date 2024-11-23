@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cijss2taso5eg"]
+
+[ext_resource type="Script" path="res://scenes/components/mailbox_collection_component/mailbox_collection_component.gd" id="1_y2pqu"]
+
+[node name="MailboxCollectionComponent" type="Node"]
+script = ExtResource("1_y2pqu")

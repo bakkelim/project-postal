@@ -1,0 +1,2 @@
+class_name InteractionComponent
+extends Area2D

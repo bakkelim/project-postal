@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bk5agr7vpneyh"]
+[gd_scene load_steps=3 format=3 uid="uid://bk5agr7vpneyh"]
 
 [ext_resource type="PackedScene" uid="uid://cp56vfnhiyypd" path="res://scenes/objects/house/house.tscn" id="1_8nb7i"]
+[ext_resource type="PackedScene" uid="uid://cr0gyoak3ffk6" path="res://scenes/objects/mailbox/mailbox.tscn" id="2_jwe8o"]
 
 [node name="Main" type="Node"]
 
@@ -8,7 +9,16 @@
 position = Vector2(89, 81)
 
 [node name="House2" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(413, 115)
+position = Vector2(664, 237)
 
 [node name="House3" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(217, 306)
+position = Vector2(209, 303)
+
+[node name="House4" parent="." instance=ExtResource("1_8nb7i")]
+position = Vector2(644, 72)
+
+[node name="House5" parent="." instance=ExtResource("1_8nb7i")]
+position = Vector2(452, 297)
+
+[node name="MailBox" parent="." instance=ExtResource("2_jwe8o")]
+position = Vector2(315, 85)
