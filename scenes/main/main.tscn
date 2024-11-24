@@ -9,16 +9,16 @@
 position = Vector2(89, 81)
 
 [node name="House2" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(664, 237)
+position = Vector2(94, 349)
 
 [node name="House3" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(209, 303)
+position = Vector2(328, 569)
 
 [node name="House4" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(644, 72)
+position = Vector2(583, 498)
 
 [node name="House5" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(452, 297)
+position = Vector2(705, 183)
 
 [node name="MailBox" parent="." instance=ExtResource("2_jwe8o")]
-position = Vector2(315, 85)
+position = Vector2(307, 268)

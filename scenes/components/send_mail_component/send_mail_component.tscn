@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfp82l6x3verq"]
-
-[ext_resource type="Script" path="res://scenes/components/send_mail_component/send_mail_component.gd" id="1_laax5"]
-
-[node name="SendMailComponent" type="Node"]
-script = ExtResource("1_laax5")
-
-[node name="SendMailTimer" type="Timer" parent="."]
