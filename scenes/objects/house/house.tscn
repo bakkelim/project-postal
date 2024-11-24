@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/objects/house/house.gd" id="1_w4lp1"]
 [ext_resource type="PackedScene" uid="uid://cwaimk52pikyg" path="res://scenes/components/produce_mail_component/produce_mail_component.tscn" id="2_f8yqq"]
 [ext_resource type="Texture2D" uid="uid://bwtm34vltctw" path="res://icon.svg" id="2_f50h4"]
-[ext_resource type="PackedScene" uid="uid://bfp82l6x3verq" path="res://scenes/components/send_mail_component/send_mail_component.tscn" id="3_jvuy5"]
+[ext_resource type="PackedScene" uid="uid://b3s0o442pwwat" path="res://scenes/components/animate_between_component/animate_between_component.tscn" id="4_6owv8"]
 [ext_resource type="PackedScene" uid="uid://cijss2taso5eg" path="res://scenes/components/mailbox_collection_component/mailbox_collection_component.tscn" id="4_vp22r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yoy84"]
@@ -17,15 +17,31 @@ script = ExtResource("1_w4lp1")
 [node name="ProduceMailComponent" parent="." node_paths=PackedStringArray("progress_bar") instance=ExtResource("2_f8yqq")]
 progress_bar = NodePath("../ProduceMailProgressBar")
 
-[node name="SendMailComponent" parent="." instance=ExtResource("3_jvuy5")]
-
 [node name="MailboxCollectionComponent" parent="." instance=ExtResource("4_vp22r")]
+
+[node name="AnimateBetweenComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("4_6owv8")]
+sprite = NodePath("../ResidentSprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yoy84")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_f50h4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_yoy84")
+[node name="ResidentSprite" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(0.25, 0.5)
+texture = ExtResource("2_f50h4")
+
+[node name="ConnectedLabel" type="Label" parent="."]
+offset_left = 43.0
+offset_top = -64.0
+offset_right = 83.0
+offset_bottom = -41.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "!"
 
 [node name="ProduceMailProgressBar" type="ProgressBar" parent="."]
 custom_minimum_size = Vector2(100, 10)
@@ -34,11 +50,3 @@ offset_top = 32.0
 offset_right = 50.0
 offset_bottom = 59.0
 value = 50.0
-
-[node name="ConnectedLabel" type="Label" parent="."]
-offset_left = 43.0
-offset_top = -64.0
-offset_right = 83.0
-offset_bottom = -41.0
-size_flags_horizontal = 4
-text = "X"
