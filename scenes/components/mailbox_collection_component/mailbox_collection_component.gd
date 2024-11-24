@@ -1,17 +1,18 @@
 class_name MailCollectionComponent
 extends Node
 
-var collection: Array[Mailbox] = []
+var _collection: Array[Mailbox] = []
+
+
+func count() -> int:
+	return _collection.size()
 
 
 func add(mailbox: Mailbox) -> void:
-	if collection.has(mailbox):
+	if _collection.has(mailbox):
 		return
-
-	collection.push_back(mailbox)
-	print(collection)
+	_collection.push_back(mailbox)
 
 
 func remove(mailbox: Mailbox) -> void:
-	collection.erase(mailbox)
-	print(collection)
+	_collection.erase(mailbox)
