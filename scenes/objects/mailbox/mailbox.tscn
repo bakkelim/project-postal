@@ -1,6 +1,5 @@
 [gd_scene load_steps=8 format=3 uid="uid://cr0gyoak3ffk6"]
 
-[ext_resource type="Texture2D" uid="uid://bwtm34vltctw" path="res://icon.svg" id="1_dxgdc"]
 [ext_resource type="Script" path="res://scenes/objects/mailbox/mailbox.gd" id="1_yr54c"]
 [ext_resource type="PackedScene" uid="uid://dhgq1vmc7nila" path="res://scenes/components/interaction_component/interaction_component.tscn" id="2_85rj6"]
 [ext_resource type="PackedScene" uid="uid://cpd33tr66gs70" path="res://scenes/components/pick_up-component/pick_up_component.tscn" id="2_fr46o"]
@@ -8,6 +7,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok77w"]
 radius = 600.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e4eob"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q23af"]
 size = Vector2(128, 128)
@@ -31,7 +33,7 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_ok77w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_dxgdc")
+texture = SubResource("CompressedTexture2D_e4eob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_q23af")

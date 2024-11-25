@@ -18,11 +18,12 @@ func _physics_process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("mouse_left"):
 		return
+
 	if is_grabbed:
 		is_grabbed = false
 		placed.emit()
+		get_viewport().set_input_as_handled()
 	elif sprite.get_rect().has_point(sprite.to_local(event.position)):
 		is_grabbed = true
 		grabbed.emit()
-
-	get_viewport().set_input_as_handled()
+		get_viewport().set_input_as_handled()

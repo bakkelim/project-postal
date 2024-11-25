@@ -7,6 +7,7 @@ var state: States = States.IDLE:
 	set = _set_state
 var has_mailbox: bool
 var has_mail: bool
+var traveling_to_mailbox: Mailbox
 
 @onready var produce_mail_component: ProduceMailComponent = $ProduceMailComponent
 @onready var mailbox_collection_component: MailboxCollectionComponent = $MailboxCollectionComponent
@@ -16,8 +17,6 @@ var has_mail: bool
 
 
 func _ready() -> void:
-	mailbox_collection_component.connected.connect(_on_mailbox_connected)
-	mailbox_collection_component.disconnected.connect(_on_mailbox_disconnected)
 	produce_mail_component.mail_produced.connect(_on_mail_produced)
 	state = States.PRODUCING
 	resident_sprite.visible = false
@@ -25,10 +24,20 @@ func _ready() -> void:
 
 func register_mailbox(mailbox: Mailbox) -> void:
 	mailbox_collection_component.add(mailbox)
+	has_mailbox = true
+	connected_label.visible = false
+	if state == States.WAITING:
+		state = States.DELIVERING
 
 
 func unregister_mailbox(mailbox: Mailbox) -> void:
 	mailbox_collection_component.remove(mailbox)
+	if mailbox_collection_component.count() <= 0:
+		has_mailbox = false
+		connected_label.visible = true
+
+	if state == States.DELIVERING and mailbox == traveling_to_mailbox:
+		state = States.RETURNING
 
 
 func _set_state(new_state: int) -> void:
@@ -52,8 +61,10 @@ func _set_state(new_state: int) -> void:
 	if state == States.DELIVERING:
 		animate_between_component.animation_finished.connect(_on_delivered)
 		resident_sprite.visible = true
-		var mailbox = mailbox_collection_component.get_mailbox()
-		animate_between_component.start_animation(global_position, mailbox.global_position)
+		traveling_to_mailbox = mailbox_collection_component.get_closest_mailbox()
+		animate_between_component.start_animation(
+			global_position, traveling_to_mailbox.global_position
+		)
 	if state == States.DELIVERED:
 		has_mail = false
 		state = States.RETURNING
@@ -75,17 +86,3 @@ func _on_returned() -> void:
 		state = States.WAITING
 	else:
 		state = States.PRODUCING
-
-
-func _on_mailbox_connected() -> void:
-	has_mailbox = true
-	connected_label.visible = false
-	if state == States.WAITING:
-		state = States.DELIVERING
-
-
-func _on_mailbox_disconnected() -> void:
-	has_mailbox = false
-	connected_label.visible = true
-	if state == States.DELIVERING:
-		state = States.RETURNING

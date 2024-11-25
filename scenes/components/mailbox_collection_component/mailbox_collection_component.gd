@@ -1,16 +1,22 @@
 class_name MailboxCollectionComponent
 extends Node
 
-signal connected
-signal disconnected
+@export var house: House
 
 var _collection: Array[Mailbox] = []
 
 
-func get_mailbox() -> Mailbox:
+func get_closest_mailbox() -> Mailbox:
 	if _collection.size() <= 0:
 		return
+
 	return _collection[0]
+
+
+func _sort_by_distance_to_house(mailbox1: Mailbox, mailbox2: Mailbox) -> bool:
+	var mailbox1_to_house := house.global_position.distance_to(mailbox1.global_position)
+	var mailbox2_to_house := house.global_position.distance_to(mailbox2.global_position)
+	return mailbox1_to_house < mailbox2_to_house
 
 
 func count() -> int:
@@ -22,13 +28,9 @@ func add(mailbox: Mailbox) -> void:
 		return
 
 	_collection.push_back(mailbox)
-
-	if _collection.size() == 1:
-		connected.emit()
+	_collection.sort_custom(_sort_by_distance_to_house)
 
 
 func remove(mailbox: Mailbox) -> void:
 	_collection.erase(mailbox)
-
-	if _collection.size() <= 0:
-		disconnected.emit()
+	_collection.sort_custom(_sort_by_distance_to_house)

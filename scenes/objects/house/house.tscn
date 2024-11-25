@@ -17,7 +17,8 @@ script = ExtResource("1_w4lp1")
 [node name="ProduceMailComponent" parent="." node_paths=PackedStringArray("progress_bar") instance=ExtResource("2_f8yqq")]
 progress_bar = NodePath("../ProduceMailProgressBar")
 
-[node name="MailboxCollectionComponent" parent="." instance=ExtResource("4_vp22r")]
+[node name="MailboxCollectionComponent" parent="." node_paths=PackedStringArray("house") instance=ExtResource("4_vp22r")]
+house = NodePath("..")
 
 [node name="AnimateBetweenComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("4_6owv8")]
 sprite = NodePath("../ResidentSprite")
@@ -49,4 +50,5 @@ offset_left = -50.0
 offset_top = 32.0
 offset_right = 50.0
 offset_bottom = 59.0
+mouse_filter = 2
 value = 50.0
