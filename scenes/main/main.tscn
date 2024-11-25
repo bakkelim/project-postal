@@ -21,7 +21,7 @@ position = Vector2(583, 498)
 position = Vector2(705, 183)
 
 [node name="MailBox" parent="." instance=ExtResource("2_jwe8o")]
-position = Vector2(307, 268)
+position = Vector2(335, 362)
 
 [node name="MailBox2" parent="." instance=ExtResource("2_jwe8o")]
 position = Vector2(798, 347)

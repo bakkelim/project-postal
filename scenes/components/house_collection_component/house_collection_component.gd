@@ -1,14 +1,18 @@
 class_name HouseCollectionComponent
 extends Node
 
-var collection: Array[House] = []
+var _collection: Array[House] = []
+
+
+func get_collection() -> Array[House]:
+	return _collection
 
 
 func add(house: House) -> void:
-	if collection.has(house):
+	if _collection.has(house):
 		return
-	collection.push_back(house)
+	_collection.push_back(house)
 
 
 func remove(house: House) -> void:
-	collection.erase(house)
+	_collection.erase(house)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cr0gyoak3ffk6"]
+[gd_scene load_steps=9 format=3 uid="uid://cr0gyoak3ffk6"]
 
 [ext_resource type="Script" path="res://scenes/objects/mailbox/mailbox.gd" id="1_yr54c"]
 [ext_resource type="PackedScene" uid="uid://dhgq1vmc7nila" path="res://scenes/components/interaction_component/interaction_component.tscn" id="2_85rj6"]
 [ext_resource type="PackedScene" uid="uid://cpd33tr66gs70" path="res://scenes/components/pick_up-component/pick_up_component.tscn" id="2_fr46o"]
 [ext_resource type="PackedScene" uid="uid://cfggfmh5qixij" path="res://scenes/components/house_collection_component/house_collection_component.tscn" id="3_8awm2"]
+[ext_resource type="PackedScene" uid="uid://bbfe4b3tfbxtk" path="res://scenes/components/edges_component/edges_component.tscn" id="4_w0d62"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok77w"]
 radius = 600.0
@@ -26,10 +27,24 @@ sprite = NodePath("../Sprite2D")
 
 [node name="HouseCollectionComponent" parent="." instance=ExtResource("3_8awm2")]
 
+[node name="HoverHouseCollectionComponent" parent="." instance=ExtResource("3_8awm2")]
+
+[node name="EdgesComponent" parent="." instance=ExtResource("4_w0d62")]
+z_index = -9
+
 [node name="CoverageAreaComponent" parent="." instance=ExtResource("2_85rj6")]
+z_index = -10
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CoverageAreaComponent"]
+shape = SubResource("CircleShape2D_ok77w")
+
+[node name="HoverAreaComponent" parent="." instance=ExtResource("2_85rj6")]
+z_index = -10
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverAreaComponent"]
 shape = SubResource("CircleShape2D_ok77w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
