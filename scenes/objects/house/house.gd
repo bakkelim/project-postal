@@ -40,7 +40,7 @@ func unregister_mailbox(mailbox: Mailbox) -> void:
 		state = States.RETURNING
 
 
-func _set_state(new_state: int) -> void:
+func _set_state(new_state: States) -> void:
 	var previous_state := state
 	state = new_state
 
