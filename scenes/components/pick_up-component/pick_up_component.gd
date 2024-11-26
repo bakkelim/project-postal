@@ -22,8 +22,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if is_grabbed:
 		is_grabbed = false
 		placed.emit()
+		GameState.state = GameState.States.SELECTING
 		get_viewport().set_input_as_handled()
+	elif GameState.state == GameState.States.PLACING:
+		return
 	elif sprite.get_rect().has_point(sprite.to_local(event.position)):
 		is_grabbed = true
 		grabbed.emit()
+		GameState.state = GameState.States.PLACING
 		get_viewport().set_input_as_handled()
