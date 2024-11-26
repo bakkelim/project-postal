@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cr0gyoak3ffk6"]
+[gd_scene load_steps=10 format=3 uid="uid://cr0gyoak3ffk6"]
 
 [ext_resource type="Script" path="res://scenes/objects/mailbox/mailbox.gd" id="1_yr54c"]
 [ext_resource type="PackedScene" uid="uid://dhgq1vmc7nila" path="res://scenes/components/interaction_component/interaction_component.tscn" id="2_85rj6"]
 [ext_resource type="PackedScene" uid="uid://cpd33tr66gs70" path="res://scenes/components/pick_up-component/pick_up_component.tscn" id="2_fr46o"]
 [ext_resource type="PackedScene" uid="uid://cfggfmh5qixij" path="res://scenes/components/house_collection_component/house_collection_component.tscn" id="3_8awm2"]
 [ext_resource type="PackedScene" uid="uid://bbfe4b3tfbxtk" path="res://scenes/components/edges_component/edges_component.tscn" id="4_w0d62"]
+[ext_resource type="PackedScene" uid="uid://bn63x0dh782ay" path="res://scenes/components/capacity_component/capacity_component.tscn" id="5_is8xa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok77w"]
 radius = 600.0
@@ -16,7 +17,6 @@ load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.cte
 size = Vector2(128, 128)
 
 [node name="Mailbox" type="StaticBody2D"]
-rotation = 0.785398
 scale = Vector2(0.5, 0.5)
 collision_layer = 4
 collision_mask = 0
@@ -31,6 +31,10 @@ sprite = NodePath("../Sprite2D")
 
 [node name="EdgesComponent" parent="." instance=ExtResource("4_w0d62")]
 z_index = -9
+
+[node name="CapacityComponent" parent="." instance=ExtResource("5_is8xa")]
+z_index = 1
+position = Vector2(-2, 62)
 
 [node name="CoverageAreaComponent" parent="." instance=ExtResource("2_85rj6")]
 z_index = -10
@@ -48,7 +52,26 @@ monitoring = false
 shape = SubResource("CircleShape2D_ok77w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.785398
 texture = SubResource("CompressedTexture2D_e4eob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.785398
 shape = SubResource("RectangleShape2D_q23af")
+
+[node name="FullLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -106.0
+offset_right = 12.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "!"

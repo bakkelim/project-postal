@@ -67,6 +67,7 @@ func _set_state(new_state: States) -> void:
 		)
 	if state == States.DELIVERED:
 		has_mail = false
+		traveling_to_mailbox.deliver_mail()
 		state = States.RETURNING
 	if state == States.RETURNING:
 		animate_between_component.animation_finished.connect(_on_returned)
