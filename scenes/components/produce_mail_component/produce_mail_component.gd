@@ -13,6 +13,7 @@ signal mail_produced
 func _ready() -> void:
 	produce_timer.timeout.connect(_on_produce_timeout)
 	produce_timer.one_shot = true
+	await owner.ready
 	progress_bar.value = 0
 
 

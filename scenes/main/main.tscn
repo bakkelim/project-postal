@@ -22,10 +22,11 @@ position = Vector2(583, 498)
 position = Vector2(1012, 169)
 
 [node name="MailBox" parent="." instance=ExtResource("2_jwe8o")]
-position = Vector2(335, 362)
+position = Vector2(314, 325)
 
 [node name="MailBox2" parent="." instance=ExtResource("2_jwe8o")]
-position = Vector2(798, 347)
+position = Vector2(736, 293)
+capacity = 3
 
 [node name="PostOffice" parent="." instance=ExtResource("3_amkxi")]
-position = Vector2(591, 84)
+position = Vector2(531, 104)
