@@ -1,6 +1,10 @@
 class_name Mailbox
 extends StaticBody2D
 
+signal grabbed
+signal placed
+signal full
+
 @export var coverage_radius: float = 600.0
 @export var capacity: int = 5
 
@@ -24,7 +28,7 @@ func _ready() -> void:
 	hover_area_component.body_exited.connect(_on_hover_exited)
 	pick_up_component.grabbed.connect(_on_grabbed)
 	pick_up_component.placed.connect(_on_placed)
-	capacity_component.full.connect(_on_mailbox_full)
+	capacity_component.changed.connect(_on_capacity_changed)
 	capacity_component.capacity = capacity
 	full_label.visible = false
 
@@ -41,6 +45,7 @@ func _on_grabbed() -> void:
 	coverage_area_component.monitoring = false
 	hover_area_component.monitoring = true
 	edges_component.redraw_edges = true
+	grabbed.emit()
 
 
 func _on_placed() -> void:
@@ -48,6 +53,7 @@ func _on_placed() -> void:
 		coverage_area_component.monitoring = true
 	hover_area_component.monitoring = false
 	edges_component.redraw_edges = false
+	placed.emit()
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -80,7 +86,21 @@ func _on_hover_exited(body: Node2D) -> void:
 	edges_component.draw_edges(hover_house_collection_component.get_global_positions())
 
 
-func _on_mailbox_full() -> void:
+func _on_capacity_changed() -> void:
+	if capacity_component.is_full:
+		_update_mailbox_full()
+	else:
+		_update_mailbox_not_full()
+
+
+func _update_mailbox_not_full() -> void:
+	coverage_area_component.monitoring = true
+	is_full = false
+	full_label.visible = false
+
+
+func _update_mailbox_full() -> void:
 	coverage_area_component.monitoring = false
 	is_full = true
 	full_label.visible = true
+	full.emit()

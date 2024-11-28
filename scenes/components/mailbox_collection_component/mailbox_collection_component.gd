@@ -1,7 +1,7 @@
 class_name MailboxCollectionComponent
 extends Node
 
-@export var house: House
+signal first_added
 
 var _collection: Array[Mailbox] = []
 
@@ -10,19 +10,15 @@ func get_collection() -> Array[Mailbox]:
 	return _collection
 
 
+func get_copy() -> Array[Mailbox]:
+	return _collection.duplicate()
+
+
 func get_closest_mailbox() -> Mailbox:
 	if _collection.size() <= 0:
 		return
 
 	return _collection[0]
-
-
-func _sort_by_distance_to_house(mailbox1: Mailbox, mailbox2: Mailbox) -> bool:
-	if not house:  #TODO: remove
-		return false
-	var mailbox1_to_house := house.global_position.distance_to(mailbox1.global_position)
-	var mailbox2_to_house := house.global_position.distance_to(mailbox2.global_position)
-	return mailbox1_to_house < mailbox2_to_house
 
 
 func count() -> int:
@@ -34,12 +30,13 @@ func add(mailbox: Mailbox) -> void:
 		return
 
 	_collection.push_back(mailbox)
-	_collection.sort_custom(_sort_by_distance_to_house)
+
+	if _collection.size() == 1:
+		first_added.emit()
 
 
 func remove(mailbox: Mailbox) -> void:
 	_collection.erase(mailbox)
-	_collection.sort_custom(_sort_by_distance_to_house)
 
 
 func get_global_positions() -> Array[Vector2]:
@@ -47,3 +44,19 @@ func get_global_positions() -> Array[Vector2]:
 	for c in _collection:
 		global_positions.push_back(c.global_position)
 	return global_positions
+
+
+func get_mailbox_closest_to(destination: Vector2) -> Mailbox:
+	if _collection.size() <= 0:
+		return null
+	var copy := _collection.duplicate()
+	copy.sort_custom(_sort_by_distance_to_destination.bind(destination))
+	return copy[0]
+
+
+func _sort_by_distance_to_destination(
+	mailbox1: Mailbox, mailbox2: Mailbox, destination: Vector2
+) -> bool:
+	var distance_to_mailbox1 := destination.distance_to(mailbox1.global_position)
+	var distance_to_mailbox2 := destination.distance_to(mailbox2.global_position)
+	return distance_to_mailbox1 < distance_to_mailbox2
