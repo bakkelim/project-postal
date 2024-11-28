@@ -55,7 +55,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	house_collection_component.add(body)
 	(body as House).register_mailbox(self)
-	edges_component.draw_edges(house_collection_component.get_collection())
+	edges_component.draw_edges(house_collection_component.get_global_positions())
 
 
 func _on_body_exited(body: Node2D) -> void:
@@ -63,21 +63,21 @@ func _on_body_exited(body: Node2D) -> void:
 		return
 	house_collection_component.remove(body)
 	(body as House).unregister_mailbox(self)
-	edges_component.draw_edges(house_collection_component.get_collection())
+	edges_component.draw_edges(house_collection_component.get_global_positions())
 
 
 func _on_hover_entered(body: Node2D) -> void:
 	if not body is House:
 		return
 	hover_house_collection_component.add(body)
-	edges_component.draw_edges(hover_house_collection_component.get_collection())
+	edges_component.draw_edges(hover_house_collection_component.get_global_positions())
 
 
 func _on_hover_exited(body: Node2D) -> void:
 	if not body is House:
 		return
 	hover_house_collection_component.remove(body)
-	edges_component.draw_edges(hover_house_collection_component.get_collection())
+	edges_component.draw_edges(hover_house_collection_component.get_global_positions())
 
 
 func _on_mailbox_full() -> void:

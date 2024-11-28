@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://dr6bb5kmi6wug"]
+
+[ext_resource type="Texture2D" uid="uid://bwtm34vltctw" path="res://icon.svg" id="1_i1s2v"]
+[ext_resource type="Script" path="res://scenes/objects/post_office/post_office.gd" id="1_iqjvn"]
+[ext_resource type="PackedScene" uid="uid://cijss2taso5eg" path="res://scenes/components/mailbox_collection_component/mailbox_collection_component.tscn" id="2_0it5v"]
+[ext_resource type="PackedScene" uid="uid://bbfe4b3tfbxtk" path="res://scenes/components/edges_component/edges_component.tscn" id="2_goxbw"]
+[ext_resource type="PackedScene" uid="uid://dhgq1vmc7nila" path="res://scenes/components/interaction_component/interaction_component.tscn" id="2_ihf54"]
+[ext_resource type="PackedScene" uid="uid://cfggfmh5qixij" path="res://scenes/components/house_collection_component/house_collection_component.tscn" id="3_hq7kp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k28hx"]
+radius = 1200.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w71b6"]
+size = Vector2(256, 128)
+
+[node name="PostOffice" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_iqjvn")
+
+[node name="MailboxCollectionComponent" parent="." instance=ExtResource("2_0it5v")]
+
+[node name="HouseCollectionComponent" parent="." instance=ExtResource("3_hq7kp")]
+
+[node name="EdgesComponent" parent="." instance=ExtResource("2_goxbw")]
+
+[node name="CoverageAreaComponent" parent="." instance=ExtResource("2_ihf54")]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoverageAreaComponent"]
+shape = SubResource("CircleShape2D_k28hx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w71b6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 1)
+texture = ExtResource("1_i1s2v")

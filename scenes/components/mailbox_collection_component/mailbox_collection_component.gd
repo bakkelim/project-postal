@@ -6,6 +6,10 @@ extends Node
 var _collection: Array[Mailbox] = []
 
 
+func get_collection() -> Array[Mailbox]:
+	return _collection
+
+
 func get_closest_mailbox() -> Mailbox:
 	if _collection.size() <= 0:
 		return
@@ -14,6 +18,8 @@ func get_closest_mailbox() -> Mailbox:
 
 
 func _sort_by_distance_to_house(mailbox1: Mailbox, mailbox2: Mailbox) -> bool:
+	if not house:  #TODO: remove
+		return false
 	var mailbox1_to_house := house.global_position.distance_to(mailbox1.global_position)
 	var mailbox2_to_house := house.global_position.distance_to(mailbox2.global_position)
 	return mailbox1_to_house < mailbox2_to_house
@@ -34,3 +40,10 @@ func add(mailbox: Mailbox) -> void:
 func remove(mailbox: Mailbox) -> void:
 	_collection.erase(mailbox)
 	_collection.sort_custom(_sort_by_distance_to_house)
+
+
+func get_global_positions() -> Array[Vector2]:
+	var global_positions: Array[Vector2] = []
+	for c in _collection:
+		global_positions.push_back(c.global_position)
+	return global_positions

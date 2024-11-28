@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk5agr7vpneyh"]
+[gd_scene load_steps=4 format=3 uid="uid://bk5agr7vpneyh"]
 
 [ext_resource type="PackedScene" uid="uid://cp56vfnhiyypd" path="res://scenes/objects/house/house.tscn" id="1_8nb7i"]
 [ext_resource type="PackedScene" uid="uid://cr0gyoak3ffk6" path="res://scenes/objects/mailbox/mailbox.tscn" id="2_jwe8o"]
+[ext_resource type="PackedScene" uid="uid://dr6bb5kmi6wug" path="res://scenes/objects/post_office/post_office.tscn" id="3_amkxi"]
 
 [node name="Main" type="Node"]
 
@@ -18,10 +19,13 @@ position = Vector2(328, 569)
 position = Vector2(583, 498)
 
 [node name="House5" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(705, 183)
+position = Vector2(1012, 169)
 
 [node name="MailBox" parent="." instance=ExtResource("2_jwe8o")]
 position = Vector2(335, 362)
 
 [node name="MailBox2" parent="." instance=ExtResource("2_jwe8o")]
 position = Vector2(798, 347)
+
+[node name="PostOffice" parent="." instance=ExtResource("3_amkxi")]
+position = Vector2(591, 84)

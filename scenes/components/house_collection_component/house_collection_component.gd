@@ -16,3 +16,10 @@ func add(house: House) -> void:
 
 func remove(house: House) -> void:
 	_collection.erase(house)
+
+
+func get_global_positions() -> Array[Vector2]:
+	var global_positions: Array[Vector2] = []
+	for c in _collection:
+		global_positions.push_back(c.global_position)
+	return global_positions
