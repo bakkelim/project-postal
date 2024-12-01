@@ -9,7 +9,7 @@ var _data: Dictionary
 func enter(_previous_state_path: String, data := {}) -> void:
 	_data = data
 	animate_between_component.animation_finished.connect(_on_animation_finished)
-	animate_between_component.start_animation(resident.home_position)
+	animate_between_component.start_animation(resident.home.global_position)
 
 
 func exit() -> void:
@@ -18,7 +18,7 @@ func exit() -> void:
 
 
 func _on_animation_finished() -> void:
-	if _data.DATA_HAS_MAIL:
+	if _data.DATA_MAIL:
 		finished.emit(WAITING, _data)
 	else:
 		finished.emit(PRODUCING, _data)

@@ -1,7 +1,7 @@
 class_name ProduceMailComponent
 extends Node
 
-signal mail_produced
+signal mail_produced(mail: Mail)
 
 @export var min_produce_time: float = 0.5
 @export var max_produce_time: float = 2.0
@@ -42,4 +42,14 @@ func _get_wait_time() -> float:
 
 func _on_produce_timeout() -> void:
 	progress_bar.value = 100
-	mail_produced.emit()
+	var recipiant_house: House = _pick_random_recipient()
+	var mail := Mail.new_instance(recipiant_house)
+	mail_produced.emit(mail)
+
+
+func _pick_random_recipient() -> House:
+	var houses := get_tree().get_nodes_in_group("houses")
+	var home_index := houses.find(owner.home)
+	if home_index >= 0:
+		houses.remove_at(home_index)
+	return houses.pick_random()

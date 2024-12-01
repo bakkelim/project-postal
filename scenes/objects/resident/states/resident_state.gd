@@ -9,7 +9,7 @@ const WALKING_TO_MAILBOX = "WalkingToMailbox"
 const WALKING_TO_HOUSE = "WalkingToHouse"
 
 const DATA_SELECTED_MAILBOX = "selected_mailbox"
-const DATA_HAS_MAIL = "has_mail"
+const DATA_MAIL = "mail"
 
 var resident: Resident
 

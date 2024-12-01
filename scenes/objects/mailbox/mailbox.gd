@@ -33,7 +33,7 @@ func _ready() -> void:
 	full_label.visible = false
 
 
-func deliver_mail() -> void:
+func deliver_mail(_mail: Mail) -> void:
 	capacity_component.update_mailbox(1)
 
 
