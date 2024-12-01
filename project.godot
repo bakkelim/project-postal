@@ -23,6 +23,10 @@ GameState="*res://globals/game_state.gd"
 
 window/stretch/mode="viewport"
 
+[global_group]
+
+houses=""
+
 [input]
 
 mouse_left={
