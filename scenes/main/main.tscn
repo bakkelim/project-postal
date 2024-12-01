@@ -23,9 +23,12 @@ position = Vector2(1012, 169)
 
 [node name="MailBox" parent="." instance=ExtResource("2_jwe8o")]
 position = Vector2(314, 325)
+coverage_radius = null
+capacity = null
 
 [node name="MailBox2" parent="." instance=ExtResource("2_jwe8o")]
 position = Vector2(736, 293)
+coverage_radius = null
 capacity = 3
 
 [node name="PostOffice" parent="." instance=ExtResource("3_amkxi")]

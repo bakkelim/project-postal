@@ -3,7 +3,7 @@ extends PostmanState
 
 
 func enter(_previous_state_path: String, data := {}) -> void:
-	_collect_mail(data)
+	var mail := _collect_mail(data)
 
 	var mailboxes_to_visit: Array[Mailbox] = data.DATA_MAILBOXES_TO_VISIT
 	if mailboxes_to_visit.size() <= 0:
@@ -15,6 +15,7 @@ func enter(_previous_state_path: String, data := {}) -> void:
 		finished.emit(WALKING_TO_MAILBOX, data)
 
 
-func _collect_mail(data: Dictionary) -> void:
+func _collect_mail(data: Dictionary) -> Array[Mail]:
 	if data.DATA_SELECTED_MAILBOX is Mailbox:
-		(data.DATA_SELECTED_MAILBOX as Mailbox).capacity_component.empty_mailbox()
+		return (data.DATA_SELECTED_MAILBOX as Mailbox).capacity_component.collect_mail()
+	return []

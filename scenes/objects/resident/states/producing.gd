@@ -1,4 +1,4 @@
-class_name ResidentStateIdle
+class_name ResidentStateProducing
 extends ResidentState
 
 @export var produce_mail_component: ProduceMailComponent

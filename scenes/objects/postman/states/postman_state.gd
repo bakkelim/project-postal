@@ -1,10 +1,11 @@
 class_name PostmanState
 extends State
 
-const COLLECTING = "Collecting"
+const START_TASK = "StartTask"
 const WALKING_TO_MAILBOX = "WalkingToMailbox"
 const COLLECTED = "Collected"
 const WALKING_TO_POST_OFFICE = "WalkingToPostOffice"
+const SORTING = "Sorting"
 
 const DATA_SELECTED_MAILBOX = "selected_mailbox"
 const DATA_MAILBOXES_TO_VISIT = "mailboxes_to_visit"

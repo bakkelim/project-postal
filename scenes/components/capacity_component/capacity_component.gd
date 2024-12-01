@@ -8,25 +8,28 @@ signal changed
 		capacity = value
 		_update_label()
 
-var is_full: bool
-var _number_of_mails: int = 0:
-	set(value):
-		_number_of_mails = value
-		is_full = _number_of_mails >= capacity
-		_update_label()
+var _mails: Array[Mail] = []
 
 @onready var capacity_label: Label = $CapacityLabel
 
 
-func update_mailbox(amount: int) -> void:
-	_number_of_mails += amount
+func deposit_mail(mail: Mail) -> void:
+	_mails.push_back(mail)
+	_update_label()
 	changed.emit()
 
 
-func empty_mailbox() -> void:
-	_number_of_mails = 0
+func collect_mail() -> Array[Mail]:
+	var mails := _mails
+	_mails = []
+	_update_label()
 	changed.emit()
+	return mails
+
+
+func is_full() -> bool:
+	return _mails.size() >= capacity
 
 
 func _update_label() -> void:
-	capacity_label.text = "%s/%s" % [_number_of_mails, capacity]
+	capacity_label.text = "%s/%s" % [_mails.size(), capacity]

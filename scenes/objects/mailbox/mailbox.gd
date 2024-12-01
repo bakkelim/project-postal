@@ -33,8 +33,8 @@ func _ready() -> void:
 	full_label.visible = false
 
 
-func deliver_mail(_mail: Mail) -> void:
-	capacity_component.update_mailbox(1)
+func deliver_mail(mail: Mail) -> void:
+	capacity_component.deposit_mail(mail)
 
 
 func _draw() -> void:
@@ -87,7 +87,7 @@ func _on_hover_exited(body: Node2D) -> void:
 
 
 func _on_capacity_changed() -> void:
-	if capacity_component.is_full:
+	if capacity_component.is_full():
 		_update_mailbox_full()
 	else:
 		_update_mailbox_not_full()
