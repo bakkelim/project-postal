@@ -9,6 +9,7 @@ signal full
 @export var capacity: int = 5
 
 var is_full: bool = false
+var is_grabbed: bool
 
 @onready var coverage_area_component: InteractionComponent = $CoverageAreaComponent
 @onready var house_collection_component: HouseCollectionComponent = $HouseCollectionComponent
@@ -38,10 +39,13 @@ func deliver_mail(mail: Mail) -> void:
 
 
 func _draw() -> void:
-	draw_circle(Vector2(0, 0), coverage_radius, Color(0, 0.980392, 0.603922, .1))
+	if is_grabbed:
+		draw_circle(Vector2(0, 0), coverage_radius, Color(0, 0.980392, 0.603922, .1))
 
 
 func _on_grabbed() -> void:
+	is_grabbed = true
+	queue_redraw()
 	coverage_area_component.monitoring = false
 	hover_area_component.monitoring = true
 	edges_component.redraw_edges = true
@@ -49,6 +53,8 @@ func _on_grabbed() -> void:
 
 
 func _on_placed() -> void:
+	is_grabbed = false
+	queue_redraw()
 	if not is_full:
 		coverage_area_component.monitoring = true
 	hover_area_component.monitoring = false
