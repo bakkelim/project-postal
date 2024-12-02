@@ -6,9 +6,12 @@ const WALKING_TO_MAILBOX = "WalkingToMailbox"
 const COLLECTED = "Collected"
 const WALKING_TO_POST_OFFICE = "WalkingToPostOffice"
 const SORTING = "Sorting"
+const WALKING_TO_HOUSE = "WalkingToHouse"
+const DELIVERED = "Delivered"
 
 const DATA_SELECTED_MAILBOX = "selected_mailbox"
 const DATA_MAILBOXES_TO_VISIT = "mailboxes_to_visit"
+const DATA_SELECTED_HOUSE = "selected_house"
 
 var postman: Postman
 

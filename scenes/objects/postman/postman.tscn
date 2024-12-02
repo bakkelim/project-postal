@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dg6q66t2ct70s"]
+[gd_scene load_steps=13 format=3 uid="uid://dg6q66t2ct70s"]
 
 [ext_resource type="Texture2D" uid="uid://bwtm34vltctw" path="res://icon.svg" id="1_32qlr"]
 [ext_resource type="Script" path="res://scenes/objects/postman/postman.gd" id="1_u5fj1"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://scenes/objects/postman/states/collected.gd" id="7_vw1um"]
 [ext_resource type="Script" path="res://scenes/objects/postman/states/walking_to_post_office.gd" id="8_dauvv"]
 [ext_resource type="Script" path="res://scenes/objects/postman/states/sorting.gd" id="9_kqyms"]
+[ext_resource type="Script" path="res://scenes/objects/postman/states/walking_to_house.gd" id="10_xn178"]
+[ext_resource type="Script" path="res://scenes/objects/postman/states/delivered.gd" id="11_wt3vy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aa65o"]
 
@@ -19,6 +21,7 @@ script = ExtResource("1_u5fj1")
 
 [node name="AnimateBetweenComponent" parent="." node_paths=PackedStringArray("body") instance=ExtResource("2_u0g63")]
 body = NodePath("..")
+speed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.5)
@@ -45,3 +48,10 @@ animate_between_component = NodePath("../../AnimateBetweenComponent")
 
 [node name="Sorting" type="Node" parent="StateMachine"]
 script = ExtResource("9_kqyms")
+
+[node name="WalkingToHouse" type="Node" parent="StateMachine" node_paths=PackedStringArray("animate_between_component")]
+script = ExtResource("10_xn178")
+animate_between_component = NodePath("../../AnimateBetweenComponent")
+
+[node name="Delivered" type="Node" parent="StateMachine"]
+script = ExtResource("11_wt3vy")

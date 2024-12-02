@@ -3,7 +3,7 @@ extends PostmanState
 
 
 func enter(_previous_state_path: String, data := {}) -> void:
-	var mail := _collect_mail(data)
+	postman.collected_mail.append_array(_collect_mail(data))
 
 	var mailboxes_to_visit: Array[Mailbox] = data.DATA_MAILBOXES_TO_VISIT
 	if mailboxes_to_visit.size() <= 0:

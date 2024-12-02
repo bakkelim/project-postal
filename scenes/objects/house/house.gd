@@ -4,9 +4,14 @@ extends StaticBody2D
 static var house_counter := 0
 
 var id: String
+var received_mail_count: int = 0:
+	set(value):
+		received_mail_count = value
+		received_mails_label.text = str(received_mail_count)
 
 @onready var mailbox_collection_component: MailboxCollectionComponent = $MailboxCollectionComponent
 @onready var connected_label: Label = $ConnectedLabel
+@onready var received_mails_label: Label = $ReceivedMailsLabel
 
 
 func _init() -> void:

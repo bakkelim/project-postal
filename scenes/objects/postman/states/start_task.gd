@@ -18,6 +18,8 @@ func enter(_previous_state_path: String, data := {}) -> void:
 			finished.emit(WALKING_TO_MAILBOX, data)
 	elif postman.current_task == postman.Tasks.SORTING:
 		finished.emit(SORTING, _data)
+	elif postman.current_task == postman.Tasks.DELIVERING:
+		finished.emit(WALKING_TO_HOUSE, _data)
 
 
 func exit() -> void:

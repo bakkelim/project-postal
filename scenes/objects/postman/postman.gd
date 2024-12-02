@@ -25,6 +25,21 @@ func update_task() -> void:
 	elif current_task == Tasks.COLLECTING:
 		current_task = Tasks.SORTING
 	elif current_task == Tasks.SORTING:
+		current_task = Tasks.DELIVERING
+	elif current_task == Tasks.DELIVERING:
 		current_task = Tasks.COLLECTING
-	#elif current_task == Tasks.DELIVERING:
-	#current_task = Tasks.COLLECTING
+
+
+func get_next_house() -> House:
+	if collected_mail.size() <= 0:
+		return null
+
+	collected_mail.sort_custom(_sort_by_distance_to_destination.bind(global_position))
+	var mail: Mail = collected_mail.pop_front()
+	return mail.recipient
+
+
+func _sort_by_distance_to_destination(mail1: Mail, mail2: Mail, destination: Vector2) -> bool:
+	var distance_to_mail1 := destination.distance_to(mail1.recipient.global_position)
+	var distance_to_mail2 := destination.distance_to(mail2.recipient.global_position)
+	return distance_to_mail1 < distance_to_mail2
