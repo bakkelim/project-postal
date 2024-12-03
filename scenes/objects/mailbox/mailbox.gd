@@ -5,6 +5,8 @@ signal grabbed
 signal placed
 signal full
 
+const Scene: PackedScene = preload("res://scenes/objects/mailbox/mailbox.tscn")
+
 @export var coverage_radius: float = 600.0
 @export var capacity: int = 5
 
@@ -20,6 +22,11 @@ var hover_house_collection_component: HouseCollectionComponent = $HoverHouseColl
 @onready var hover_area_component: InteractionComponent = $HoverAreaComponent
 @onready var capacity_component: CapacityComponent = $CapacityComponent
 @onready var full_label: Label = $FullLabel
+
+
+static func new_instance() -> Mailbox:
+	var instance: Mailbox = Scene.instantiate()
+	return instance
 
 
 func _ready() -> void:
@@ -63,19 +70,21 @@ func _on_placed() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if not body is House:
-		return
-	house_collection_component.add(body)
-	(body as House).register_mailbox(self)
-	edges_component.draw_edges(house_collection_component.get_global_positions())
+	if body is House:
+		house_collection_component.add(body)
+		(body as House).register_mailbox(self)
+		edges_component.draw_edges(house_collection_component.get_global_positions())
+	elif body is PostOffice:
+		(body as PostOffice).mailbox_collection_component.add(self)
 
 
 func _on_body_exited(body: Node2D) -> void:
-	if not body is House:
-		return
-	house_collection_component.remove(body)
-	(body as House).unregister_mailbox(self)
-	edges_component.draw_edges(house_collection_component.get_global_positions())
+	if body is House:
+		house_collection_component.remove(body)
+		(body as House).unregister_mailbox(self)
+		edges_component.draw_edges(house_collection_component.get_global_positions())
+	elif body is PostOffice:
+		(body as PostOffice).mailbox_collection_component.remove(self)
 
 
 func _on_hover_entered(body: Node2D) -> void:
