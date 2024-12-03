@@ -20,27 +20,33 @@ func _get_global_positions() -> Array[Vector2]:
 	return global_positions
 
 
-func _on_mailbox_grabbed() -> void:
+func _on_mailbox_grabbed(mailbox: Mailbox) -> void:
+	mailbox_collection_component.remove(mailbox)
 	edges_component.redraw_edges = true
 
 
-func _on_mailbox_placed() -> void:
+func _on_mailbox_placed(mailbox: Mailbox) -> void:
+	mailbox_collection_component.add(mailbox)
 	edges_component.redraw_edges = false
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is House:
 		house_collection_component.add(body)
-		edges_component.draw_edges(_get_global_positions())
+		#edges_component.draw_edges(_get_global_positions())
 	elif body is Mailbox:
 		mailbox_collection_component.add(body)
-		edges_component.draw_edges(_get_global_positions())
+		#edges_component.draw_edges(_get_global_positions())
+		body.grabbed.connect(_on_mailbox_grabbed.bind(body))
+		body.placed.connect(_on_mailbox_placed.bind(body))
 
 
 func _on_body_exited(body: Node2D) -> void:
 	if body is House:
 		house_collection_component.remove(body)
-		edges_component.draw_edges(_get_global_positions())
+		#edges_component.draw_edges(_get_global_positions())
 	elif body is Mailbox:
-		mailbox_collection_component.add(body)
-		edges_component.draw_edges(_get_global_positions())
+		mailbox_collection_component.remove(body)
+		#edges_component.draw_edges(_get_global_positions())
+		body.grabbed.disconnect(_on_mailbox_grabbed)
+		body.placed.disconnect(_on_mailbox_placed)
