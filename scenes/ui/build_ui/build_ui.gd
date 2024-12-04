@@ -7,18 +7,19 @@ extends CanvasLayer
 @onready var cursor: Sprite2D = $Cursor
 @onready var margin_container: MarginContainer = $MarginContainer
 
+
 func _ready() -> void:
 	cursor.visible = false
 	mailbox_button.pressed.connect(_on_mailbox_button_pressed)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not cursor.visible:
 		return
 	var grid_position := _get_mouse_grid_cell_position()
 	cursor.global_position = grid_position * 64
-	
-	
+
+
 func _get_mouse_grid_cell_position() -> Vector2i:
 	var mouse_position := margin_container.get_global_mouse_position()
 	var grid_position := mouse_position / 64
@@ -38,6 +39,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	cursor.visible = false
 	get_viewport().set_input_as_handled()
 
+
 func _on_mailbox_button_pressed() -> void:
 	cursor.visible = true
-	

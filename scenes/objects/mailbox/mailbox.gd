@@ -45,6 +45,10 @@ func deliver_mail(mail: Mail) -> void:
 	capacity_component.deposit_mail(mail)
 
 
+func get_center_position() -> Vector2:
+	return Vector2(global_position.x + 32, global_position.y + 32)
+
+
 func _draw() -> void:
 	if is_grabbed:
 		draw_circle(Vector2(0, 0), coverage_radius, Color(0, 0.980392, 0.603922, .1))

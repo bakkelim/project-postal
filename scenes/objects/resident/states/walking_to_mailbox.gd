@@ -16,7 +16,7 @@ func enter(_previous_state_path: String, data := {}) -> void:
 	#_selected_mailbox.placed.connect(_on_mailbox_placed)
 
 	animate_between_component.animation_finished.connect(_on_animation_finished)
-	animate_between_component.start_animation(_selected_mailbox.global_position)
+	animate_between_component.start_animation(_selected_mailbox.get_center_position())
 
 
 func exit() -> void:

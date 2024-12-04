@@ -1,10 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk5agr7vpneyh"]
+[gd_scene load_steps=5 format=3 uid="uid://bk5agr7vpneyh"]
 
 [ext_resource type="PackedScene" uid="uid://cp56vfnhiyypd" path="res://scenes/objects/house/house.tscn" id="1_8nb7i"]
-[ext_resource type="PackedScene" uid="uid://cr0gyoak3ffk6" path="res://scenes/objects/mailbox/mailbox.tscn" id="2_jwe8o"]
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_kf64e"]
+[ext_resource type="PackedScene" uid="uid://8vbmvorcaa82" path="res://scenes/ui/build_ui/build_ui.tscn" id="1_t1k2b"]
 [ext_resource type="PackedScene" uid="uid://dr6bb5kmi6wug" path="res://scenes/objects/post_office/post_office.tscn" id="3_amkxi"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_kf64e")
+
+[node name="BuildUI" parent="." node_paths=PackedStringArray("mailbox_parent") instance=ExtResource("1_t1k2b")]
+mailbox_parent = NodePath("../Mailboxes")
+
+[node name="Mailboxes" type="Node" parent="."]
 
 [node name="House" parent="." instance=ExtResource("1_8nb7i")]
 position = Vector2(89, 81)
@@ -20,16 +27,6 @@ position = Vector2(583, 498)
 
 [node name="House5" parent="." instance=ExtResource("1_8nb7i")]
 position = Vector2(1012, 169)
-
-[node name="MailBox" parent="." instance=ExtResource("2_jwe8o")]
-position = Vector2(314, 325)
-coverage_radius = null
-capacity = null
-
-[node name="MailBox2" parent="." instance=ExtResource("2_jwe8o")]
-position = Vector2(736, 293)
-coverage_radius = null
-capacity = 3
 
 [node name="PostOffice" parent="." instance=ExtResource("3_amkxi")]
 position = Vector2(531, 104)
