@@ -26,9 +26,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if not cursor.visible:
 		return
+	if not grid_manager.is_tile_available(grid_manager.get_mouse_tile_position()):
+		return
 
-	var instance := Mailbox.new_instance()
-	instance.global_position = grid_manager.get_mouse_tile_position() * 64
+	var instance := Mailbox.new_instance(grid_manager.get_mouse_tile_position())
 	mailbox_parent.add_child(instance)
 	cursor.visible = false
 	get_viewport().set_input_as_handled()
@@ -36,3 +37,4 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_mailbox_button_pressed() -> void:
 	cursor.visible = true
+	GameState.state = GameState.States.PLACING

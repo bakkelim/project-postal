@@ -24,8 +24,9 @@ var hover_house_collection_component: HouseCollectionComponent = $HoverHouseColl
 @onready var full_label: Label = $FullLabel
 
 
-static func new_instance() -> Mailbox:
+static func new_instance(mouse_tile_position: Vector2i) -> Mailbox:
 	var instance: Mailbox = Scene.instantiate()
+	instance.global_position = mouse_tile_position * 64
 	return instance
 
 

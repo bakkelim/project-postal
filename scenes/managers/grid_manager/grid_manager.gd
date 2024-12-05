@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 func is_tile_available(poistion: Vector2i) -> bool:
-	return occupied_tiles.has(poistion)
+	return not occupied_tiles.has(poistion)
 
 
 func set_tile_as_occupied(position: Vector2i) -> void:
