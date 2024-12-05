@@ -21,19 +21,19 @@ grid_manager = NodePath("../GridManager")
 [node name="Mailboxes" type="Node" parent="."]
 
 [node name="House" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(89, 81)
+position = Vector2(128, 128)
 
 [node name="House2" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(94, 349)
+position = Vector2(128, 320)
 
 [node name="House3" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(328, 569)
+position = Vector2(320, 512)
 
 [node name="House4" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(583, 498)
+position = Vector2(640, 512)
 
 [node name="House5" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(1012, 169)
+position = Vector2(960, 192)
 
 [node name="PostOffice" parent="." instance=ExtResource("3_amkxi")]
-position = Vector2(531, 104)
+position = Vector2(576, 128)
