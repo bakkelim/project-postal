@@ -9,7 +9,7 @@ var current_task: Tasks
 var working_place: PostOffice
 var collected_mail: Array[Mail] = []
 
-@onready var animate_between_component: AnimateBetweenComponent = $AnimateBetweenComponent
+@onready var animate_component: AnimateComponent = $AnimateComponent
 @onready var sprite: Sprite2D = $Sprite2D
 
 

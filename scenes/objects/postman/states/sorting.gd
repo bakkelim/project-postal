@@ -1,8 +1,6 @@
 class_name PostmanStateSorting
 extends PostmanState
 
-@export var produce_mail_component: ProduceMailComponent
-
 var _data: Dictionary
 
 

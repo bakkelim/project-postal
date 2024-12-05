@@ -1,7 +1,7 @@
 class_name PostmanStateWalkingToHouse
 extends PostmanState
 
-@export var animate_between_component: AnimateBetweenComponent
+@export var animate_component: AnimateComponent
 
 var _data: Dictionary
 
@@ -13,14 +13,14 @@ func enter(_previous_state_path: String, data := {}) -> void:
 		finished.emit(WALKING_TO_POST_OFFICE, _data)
 		return
 	_data.DATA_SELECTED_HOUSE = selected_house
-	animate_between_component.animation_finished.connect(_on_animation_finished)
-	animate_between_component.start_animation(selected_house.global_position)
+	animate_component.animation_finished.connect(_on_animation_finished)
+	animate_component.start_animation(selected_house.global_position)
 
 
 func exit() -> void:
-	animate_between_component.stop_animation()
-	if animate_between_component.animation_finished.is_connected(_on_animation_finished):
-		animate_between_component.animation_finished.disconnect(_on_animation_finished)
+	animate_component.stop_animation()
+	if animate_component.animation_finished.is_connected(_on_animation_finished):
+		animate_component.animation_finished.disconnect(_on_animation_finished)
 
 
 func _on_animation_finished() -> void:

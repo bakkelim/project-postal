@@ -1,4 +1,4 @@
-class_name AnimateBetweenComponent
+class_name AnimateComponent
 extends Node
 
 signal animation_finished

@@ -1,7 +1,7 @@
 class_name PostmanStateWalkingToMailbox
 extends PostmanState
 
-@export var animate_between_component: AnimateBetweenComponent
+@export var animate_component: AnimateComponent
 
 var _data: Dictionary
 var _selected_mailbox: Mailbox
@@ -10,15 +10,15 @@ var _selected_mailbox: Mailbox
 func enter(_previous_state_path: String, data := {}) -> void:
 	_data = data
 	_selected_mailbox = data.DATA_SELECTED_MAILBOX
-	animate_between_component.animation_finished.connect(_on_animation_finished)
-	animate_between_component.start_animation(_selected_mailbox.get_center_position())
+	animate_component.animation_finished.connect(_on_animation_finished)
+	animate_component.start_animation(_selected_mailbox.get_center_position())
 	_selected_mailbox.grabbed.connect(_on_mailbox_grabbed)
 
 
 func exit() -> void:
 	_selected_mailbox.grabbed.disconnect(_on_mailbox_grabbed)
-	animate_between_component.stop_animation()
-	animate_between_component.animation_finished.disconnect(_on_animation_finished)
+	animate_component.stop_animation()
+	animate_component.animation_finished.disconnect(_on_animation_finished)
 
 
 func _on_animation_finished() -> void:

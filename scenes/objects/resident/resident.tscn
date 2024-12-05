@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/objects/resident/resident.gd" id="1_y0sae"]
 [ext_resource type="PackedScene" uid="uid://cwaimk52pikyg" path="res://scenes/components/produce_mail_component/produce_mail_component.tscn" id="2_2h74u"]
-[ext_resource type="PackedScene" uid="uid://b3s0o442pwwat" path="res://scenes/components/animate_between_component/animate_between_component.tscn" id="2_dgw3i"]
+[ext_resource type="PackedScene" uid="uid://b3s0o442pwwat" path="res://scenes/components/animate_component/animate_component.tscn" id="2_dgw3i"]
 [ext_resource type="Texture2D" uid="uid://bwtm34vltctw" path="res://icon.svg" id="3_p6ld0"]
 [ext_resource type="PackedScene" uid="uid://b7tcudqygv0rs" path="res://scenes/state_machine/state_machine.tscn" id="4_ed3co"]
 [ext_resource type="Script" path="res://scenes/objects/resident/states/producing.gd" id="6_wtn03"]
@@ -20,7 +20,7 @@ script = ExtResource("1_y0sae")
 
 [node name="ProduceMailComponent" parent="." instance=ExtResource("2_2h74u")]
 
-[node name="AnimateBetweenComponent" parent="." node_paths=PackedStringArray("body") instance=ExtResource("2_dgw3i")]
+[node name="AnimateComponent" parent="." node_paths=PackedStringArray("body") instance=ExtResource("2_dgw3i")]
 body = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -39,13 +39,13 @@ produce_mail_component = NodePath("../../ProduceMailComponent")
 [node name="Waiting" type="Node" parent="StateMachine"]
 script = ExtResource("7_4sbid")
 
-[node name="WalkingToMailbox" type="Node" parent="StateMachine" node_paths=PackedStringArray("animate_between_component")]
+[node name="WalkingToMailbox" type="Node" parent="StateMachine" node_paths=PackedStringArray("animate_component")]
 script = ExtResource("8_lmsuq")
-animate_between_component = NodePath("../../AnimateBetweenComponent")
+animate_component = NodePath("../../AnimateComponent")
 
 [node name="Delivered" type="Node" parent="StateMachine"]
 script = ExtResource("9_iideq")
 
-[node name="WalkingToHouse" type="Node" parent="StateMachine" node_paths=PackedStringArray("animate_between_component")]
+[node name="WalkingToHouse" type="Node" parent="StateMachine" node_paths=PackedStringArray("animate_component")]
 script = ExtResource("10_pngn3")
-animate_between_component = NodePath("../../AnimateBetweenComponent")
+animate_component = NodePath("../../AnimateComponent")

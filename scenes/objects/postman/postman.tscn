@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bwtm34vltctw" path="res://icon.svg" id="1_32qlr"]
 [ext_resource type="Script" path="res://scenes/objects/postman/postman.gd" id="1_u5fj1"]
-[ext_resource type="PackedScene" uid="uid://b3s0o442pwwat" path="res://scenes/components/animate_between_component/animate_between_component.tscn" id="2_u0g63"]
+[ext_resource type="PackedScene" uid="uid://b3s0o442pwwat" path="res://scenes/components/animate_component/animate_component.tscn" id="2_u0g63"]
 [ext_resource type="PackedScene" uid="uid://b7tcudqygv0rs" path="res://scenes/state_machine/state_machine.tscn" id="4_i7oqk"]
 [ext_resource type="Script" path="res://scenes/objects/postman/states/start_task.gd" id="5_c5yyp"]
 [ext_resource type="Script" path="res://scenes/objects/postman/states/walking_to_mailbox.gd" id="6_ysm1c"]
@@ -19,7 +19,7 @@ collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_u5fj1")
 
-[node name="AnimateBetweenComponent" parent="." node_paths=PackedStringArray("body") instance=ExtResource("2_u0g63")]
+[node name="AnimateComponent" parent="." node_paths=PackedStringArray("body") instance=ExtResource("2_u0g63")]
 body = NodePath("..")
 speed = 300.0
 
@@ -35,23 +35,23 @@ shape = SubResource("CircleShape2D_aa65o")
 [node name="StartTask" type="Node" parent="StateMachine"]
 script = ExtResource("5_c5yyp")
 
-[node name="WalkingToMailbox" type="Node" parent="StateMachine" node_paths=PackedStringArray("animate_between_component")]
+[node name="WalkingToMailbox" type="Node" parent="StateMachine" node_paths=PackedStringArray("animate_component")]
 script = ExtResource("6_ysm1c")
-animate_between_component = NodePath("../../AnimateBetweenComponent")
+animate_component = NodePath("../../AnimateComponent")
 
 [node name="Collected" type="Node" parent="StateMachine"]
 script = ExtResource("7_vw1um")
 
-[node name="WalkingToPostOffice" type="Node" parent="StateMachine" node_paths=PackedStringArray("animate_between_component")]
+[node name="WalkingToPostOffice" type="Node" parent="StateMachine" node_paths=PackedStringArray("animate_component")]
 script = ExtResource("8_dauvv")
-animate_between_component = NodePath("../../AnimateBetweenComponent")
+animate_component = NodePath("../../AnimateComponent")
 
 [node name="Sorting" type="Node" parent="StateMachine"]
 script = ExtResource("9_kqyms")
 
-[node name="WalkingToHouse" type="Node" parent="StateMachine" node_paths=PackedStringArray("animate_between_component")]
+[node name="WalkingToHouse" type="Node" parent="StateMachine" node_paths=PackedStringArray("animate_component")]
 script = ExtResource("10_xn178")
-animate_between_component = NodePath("../../AnimateBetweenComponent")
+animate_component = NodePath("../../AnimateComponent")
 
 [node name="Delivered" type="Node" parent="StateMachine"]
 script = ExtResource("11_wt3vy")
