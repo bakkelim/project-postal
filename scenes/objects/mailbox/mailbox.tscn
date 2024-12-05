@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cr0gyoak3ffk6"]
+[gd_scene load_steps=11 format=3 uid="uid://cr0gyoak3ffk6"]
 
 [ext_resource type="Script" path="res://scenes/objects/mailbox/mailbox.gd" id="1_yr54c"]
 [ext_resource type="PackedScene" uid="uid://dhgq1vmc7nila" path="res://scenes/components/interaction_component/interaction_component.tscn" id="2_85rj6"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cfggfmh5qixij" path="res://scenes/components/house_collection_component/house_collection_component.tscn" id="3_8awm2"]
 [ext_resource type="PackedScene" uid="uid://bbfe4b3tfbxtk" path="res://scenes/components/edges_component/edges_component.tscn" id="4_w0d62"]
 [ext_resource type="PackedScene" uid="uid://bn63x0dh782ay" path="res://scenes/components/capacity_component/capacity_component.tscn" id="5_is8xa"]
+[ext_resource type="PackedScene" uid="uid://du6cofmiqp1x8" path="res://scenes/components/building_component/building_component.tscn" id="6_o2wma"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok77w"]
 radius = 600.0
@@ -35,6 +36,8 @@ position = Vector2(64, 66)
 [node name="CapacityComponent" parent="." instance=ExtResource("5_is8xa")]
 z_index = 1
 position = Vector2(62, 128)
+
+[node name="BuildingComponent" parent="." instance=ExtResource("6_o2wma")]
 
 [node name="CoverageAreaComponent" parent="." instance=ExtResource("2_85rj6")]
 position = Vector2(64, 66)
