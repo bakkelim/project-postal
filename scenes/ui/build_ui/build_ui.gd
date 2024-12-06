@@ -32,7 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	var instance := Mailbox.new_instance(grid_manager.get_mouse_tile_position())
 	mailbox_parent.add_child(instance)
 	cursor.visible = false
-	
+
 	GameState.state = GameState.States.SELECTING
 	get_viewport().set_input_as_handled()
 

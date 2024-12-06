@@ -14,10 +14,6 @@ func is_tile_available(poistion: Vector2i) -> bool:
 	return not occupied_tiles.has(poistion)
 
 
-func set_tile_as_occupied(position: Vector2i) -> void:
-	occupied_tiles[position] = true
-
-
 func get_mouse_tile_position() -> Vector2i:
 	var mouse_position := highlight_tile_map_layer.get_global_mouse_position()
 	var grid_position := mouse_position / 64
@@ -25,6 +21,15 @@ func get_mouse_tile_position() -> Vector2i:
 	return grid_position
 
 
+func _set_tile_as_occupied(position: Vector2i) -> void:
+	occupied_tiles[position] = true
+
+
+func _set_area_as_occupied(positions: Array[Vector2i]) -> void:
+	for p in positions:
+		_set_tile_as_occupied(p)
+
+
 func _on_building_placed(building_component: BuildingComponent) -> void:
-	var position := building_component.get_tile_position()
-	set_tile_as_occupied(position)
+	var building_area := building_component.get_building_area()
+	_set_area_as_occupied(building_area)

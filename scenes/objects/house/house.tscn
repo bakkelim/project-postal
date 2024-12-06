@@ -17,22 +17,25 @@ script = ExtResource("1_w4lp1")
 [node name="MailboxCollectionComponent" parent="." instance=ExtResource("4_vp22r")]
 
 [node name="BuildingComponent" parent="." instance=ExtResource("3_kgce4")]
+dimensions = Vector2i(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_f50h4")
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(64, 64)
 shape = SubResource("RectangleShape2D_yoy84")
 
 [node name="Resident" parent="." node_paths=PackedStringArray("mailbox_collection_component", "progress_bar") instance=ExtResource("6_udono")]
+position = Vector2(64, 64)
 mailbox_collection_component = NodePath("../MailboxCollectionComponent")
 progress_bar = NodePath("../ProduceMailProgressBar")
 
 [node name="ConnectedLabel" type="Label" parent="."]
-offset_left = 43.0
-offset_top = -64.0
-offset_right = 83.0
-offset_bottom = -41.0
+offset_left = 107.0
+offset_right = 147.0
+offset_bottom = 45.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
@@ -40,18 +43,18 @@ text = "!"
 
 [node name="ProduceMailProgressBar" type="ProgressBar" parent="."]
 custom_minimum_size = Vector2(100, 10)
-offset_left = -50.0
-offset_top = 32.0
-offset_right = 50.0
-offset_bottom = 59.0
+offset_left = 14.0
+offset_top = 96.0
+offset_right = 114.0
+offset_bottom = 123.0
 mouse_filter = 2
 value = 50.0
 
 [node name="ReceivedMailsLabel" type="Label" parent="."]
-offset_left = -56.0
-offset_top = -62.0
-offset_right = -16.0
-offset_bottom = -39.0
+offset_left = 8.0
+offset_top = 2.0
+offset_right = 48.0
+offset_bottom = 25.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "0"

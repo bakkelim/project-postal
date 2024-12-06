@@ -21,7 +21,7 @@ grid_manager = NodePath("../GridManager")
 [node name="Mailboxes" type="Node" parent="."]
 
 [node name="House" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(128, 128)
+position = Vector2(64, 64)
 
 [node name="House2" parent="." instance=ExtResource("1_8nb7i")]
 position = Vector2(128, 320)
