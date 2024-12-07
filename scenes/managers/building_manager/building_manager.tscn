@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd3x4amq05w5g"]
+
+[ext_resource type="Script" path="res://scenes/managers/building_manager/building_manager.gd" id="1_vdfoi"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_23p1i"]
+size = Vector2(64, 64)
+
+[node name="BuildingManager" type="Node"]
+script = ExtResource("1_vdfoi")
+
+[node name="Cursor" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_23p1i")
+centered = false

@@ -1,9 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://8vbmvorcaa82"]
+[gd_scene load_steps=2 format=3 uid="uid://8vbmvorcaa82"]
 
 [ext_resource type="Script" path="res://scenes/ui/build_ui/build_ui.gd" id="1_ssbyt"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_73ihi"]
-size = Vector2(64, 64)
 
 [node name="BuildUI" type="CanvasLayer"]
 script = ExtResource("1_ssbyt")
@@ -27,7 +24,3 @@ size_flags_vertical = 8
 [node name="MailboxButton" type="Button" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "New mailbox"
-
-[node name="Cursor" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_73ihi")
-centered = false
