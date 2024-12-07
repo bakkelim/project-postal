@@ -21,5 +21,5 @@ func remove(house: House) -> void:
 func get_global_positions() -> Array[Vector2]:
 	var global_positions: Array[Vector2] = []
 	for c in _collection:
-		global_positions.push_back(c.global_position)
+		global_positions.push_back(c.get_center_position())
 	return global_positions

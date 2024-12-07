@@ -22,6 +22,7 @@ var hover_house_collection_component: HouseCollectionComponent = $HoverHouseColl
 @onready var hover_area_component: InteractionComponent = $HoverAreaComponent
 @onready var capacity_component: CapacityComponent = $CapacityComponent
 @onready var full_label: Label = $FullLabel
+@onready var building_component: BuildingComponent = $BuildingComponent
 
 
 static func new_instance(mouse_tile_position: Vector2i) -> Mailbox:
@@ -47,7 +48,9 @@ func deliver_mail(mail: Mail) -> void:
 
 
 func get_center_position() -> Vector2:
-	return Vector2(global_position.x + 32, global_position.y + 32)
+	var x := global_position.x + (32 * building_component.dimensions.x)
+	var y := global_position.y + (32 * building_component.dimensions.y)
+	return Vector2(x, y)
 
 
 func _draw() -> void:

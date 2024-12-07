@@ -18,9 +18,7 @@ build_ui = NodePath("../BuildUI")
 grid_manager = NodePath("../GridManager")
 mailbox_root = NodePath("../Mailboxes")
 
-[node name="BuildUI" parent="." node_paths=PackedStringArray("mailbox_parent", "grid_manager") instance=ExtResource("1_t1k2b")]
-mailbox_parent = NodePath("../Mailboxes")
-grid_manager = NodePath("../GridManager")
+[node name="BuildUI" parent="." instance=ExtResource("1_t1k2b")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 

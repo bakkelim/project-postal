@@ -9,7 +9,7 @@ var _data: Dictionary
 func enter(_previous_state_path: String, data := {}) -> void:
 	_data = data
 	animate_component.animation_finished.connect(_on_animation_finished)
-	animate_component.start_animation(postman.working_place.global_position)
+	animate_component.start_animation(postman.working_place.get_center_position())
 
 
 func exit() -> void:

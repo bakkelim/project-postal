@@ -14,7 +14,7 @@ func enter(_previous_state_path: String, data := {}) -> void:
 		return
 	_data.DATA_SELECTED_HOUSE = selected_house
 	animate_component.animation_finished.connect(_on_animation_finished)
-	animate_component.start_animation(selected_house.global_position)
+	animate_component.start_animation(selected_house.get_center_position())
 
 
 func exit() -> void:

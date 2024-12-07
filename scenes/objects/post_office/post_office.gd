@@ -6,11 +6,18 @@ extends StaticBody2D
 @onready var coverage_area_component: InteractionComponent = $CoverageAreaComponent
 @onready var edges_component: EdgesComponent = $EdgesComponent
 @onready var postman: Postman = $Postman
+@onready var building_component: BuildingComponent = $BuildingComponent
 
 
 func _ready() -> void:
 	coverage_area_component.body_entered.connect(_on_body_entered)
 	coverage_area_component.body_exited.connect(_on_body_exited)
+
+
+func get_center_position() -> Vector2:
+	var x := global_position.x + (32 * building_component.dimensions.x)
+	var y := global_position.y + (32 * building_component.dimensions.y)
+	return Vector2(x, y)
 
 
 func _get_global_positions() -> Array[Vector2]:

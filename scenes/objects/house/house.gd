@@ -12,6 +12,7 @@ var received_mail_count: int = 0:
 @onready var mailbox_collection_component: MailboxCollectionComponent = $MailboxCollectionComponent
 @onready var connected_label: Label = $ConnectedLabel
 @onready var received_mails_label: Label = $ReceivedMailsLabel
+@onready var building_component: BuildingComponent = $BuildingComponent
 
 
 func _init() -> void:
@@ -28,3 +29,9 @@ func unregister_mailbox(mailbox: Mailbox) -> void:
 	mailbox_collection_component.remove(mailbox)
 	if mailbox_collection_component.count() <= 0:
 		connected_label.visible = true
+
+
+func get_center_position() -> Vector2:
+	var x := global_position.x + (32 * building_component.dimensions.x)
+	var y := global_position.y + (32 * building_component.dimensions.y)
+	return Vector2(x, y)
