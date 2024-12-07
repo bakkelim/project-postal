@@ -1,6 +1,8 @@
 class_name House
 extends StaticBody2D
 
+const Scene: PackedScene = preload("res://scenes/objects/house/house.tscn")
+
 static var house_counter := 0
 
 var id: String
@@ -13,6 +15,12 @@ var received_mail_count: int = 0:
 @onready var connected_label: Label = $ConnectedLabel
 @onready var received_mails_label: Label = $ReceivedMailsLabel
 @onready var building_component: BuildingComponent = $BuildingComponent
+
+
+static func new_instance(mouse_tile_position: Vector2i) -> House:
+	var instance: House = Scene.instantiate()
+	instance.global_position = mouse_tile_position * 64
+	return instance
 
 
 func _init() -> void:

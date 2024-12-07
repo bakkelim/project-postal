@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://bk5agr7vpneyh"]
 
-[ext_resource type="PackedScene" uid="uid://cp56vfnhiyypd" path="res://scenes/objects/house/house.tscn" id="1_8nb7i"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_kf64e"]
 [ext_resource type="PackedScene" uid="uid://8vbmvorcaa82" path="res://scenes/ui/build_ui/build_ui.tscn" id="1_t1k2b"]
 [ext_resource type="PackedScene" uid="uid://l7ri4s80jtun" path="res://scenes/managers/grid_manager/grid_manager.tscn" id="2_n2yw8"]
 [ext_resource type="PackedScene" uid="uid://dr6bb5kmi6wug" path="res://scenes/objects/post_office/post_office.tscn" id="3_amkxi"]
 [ext_resource type="PackedScene" uid="uid://cd3x4amq05w5g" path="res://scenes/managers/building_manager/building_manager.tscn" id="3_bdker"]
+[ext_resource type="PackedScene" uid="uid://cu320w4niwr7l" path="res://scenes/managers/spawn_manager/spawn_manager.tscn" id="4_kmrci"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_kf64e")
@@ -13,31 +13,23 @@ script = ExtResource("1_kf64e")
 [node name="GridManager" parent="." node_paths=PackedStringArray("highlight_tile_map_layer") instance=ExtResource("2_n2yw8")]
 highlight_tile_map_layer = NodePath("../TileMapLayer")
 
-[node name="BuildingManager" parent="." node_paths=PackedStringArray("build_ui", "grid_manager", "mailbox_root") instance=ExtResource("3_bdker")]
+[node name="BuildingManager" parent="." node_paths=PackedStringArray("build_ui", "grid_manager", "mailbox_root", "house_root", "spawn_manager") instance=ExtResource("3_bdker")]
 build_ui = NodePath("../BuildUI")
 grid_manager = NodePath("../GridManager")
 mailbox_root = NodePath("../Mailboxes")
+house_root = NodePath("../Houses")
+spawn_manager = NodePath("../SpawnManager")
+
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("house_root") instance=ExtResource("4_kmrci")]
+house_root = NodePath("../Houses")
 
 [node name="BuildUI" parent="." instance=ExtResource("1_t1k2b")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
+[node name="PostOffice" parent="." instance=ExtResource("3_amkxi")]
+position = Vector2(448, 256)
+
 [node name="Mailboxes" type="Node" parent="."]
 
-[node name="House" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(64, 64)
-
-[node name="House2" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(128, 320)
-
-[node name="House3" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(320, 512)
-
-[node name="House4" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(640, 512)
-
-[node name="House5" parent="." instance=ExtResource("1_8nb7i")]
-position = Vector2(960, 192)
-
-[node name="PostOffice" parent="." instance=ExtResource("3_amkxi")]
-position = Vector2(576, 128)
+[node name="Houses" type="Node" parent="."]

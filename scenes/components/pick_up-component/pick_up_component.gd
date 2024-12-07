@@ -12,7 +12,8 @@ var is_grabbed: bool
 func _physics_process(_delta: float) -> void:
 	if not is_grabbed:
 		return
-	sprite.owner.global_position = sprite.get_global_mouse_position()
+	var grid_position := _position_to_grid(sprite.get_global_mouse_position())
+	sprite.owner.global_position = grid_position * 64
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -31,3 +32,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		grabbed.emit()
 		GameState.state = GameState.States.PLACING
 		get_viewport().set_input_as_handled()
+
+
+func _position_to_grid(position: Vector2) -> Vector2i:
+	var grid_position := position / 64
+	grid_position = grid_position.floor()
+	return grid_position
