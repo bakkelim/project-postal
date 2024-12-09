@@ -17,9 +17,9 @@ var received_mail_count: int = 0:
 @onready var building_component: BuildingComponent = $BuildingComponent
 
 
-static func new_instance(mouse_tile_position: Vector2i) -> House:
+static func new_instance(tile_position: Vector2i) -> House:
 	var instance: House = Scene.instantiate()
-	instance.global_position = mouse_tile_position * 64
+	instance.global_position = tile_position * 64
 	return instance
 
 
@@ -30,13 +30,12 @@ func _init() -> void:
 
 func register_mailbox(mailbox: Mailbox) -> void:
 	mailbox_collection_component.add(mailbox)
-	connected_label.visible = false
+	connected_label.visible = not mailbox_collection_component.has_available_mailbox()
 
 
 func unregister_mailbox(mailbox: Mailbox) -> void:
 	mailbox_collection_component.remove(mailbox)
-	if mailbox_collection_component.count() <= 0:
-		connected_label.visible = true
+	connected_label.visible = not mailbox_collection_component.has_available_mailbox()
 
 
 func get_center_position() -> Vector2:

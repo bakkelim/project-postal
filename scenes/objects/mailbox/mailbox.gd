@@ -3,26 +3,21 @@ extends Area2D
 
 signal grabbed
 signal placed
-signal full
 
 const Scene: PackedScene = preload("res://scenes/objects/mailbox/mailbox.tscn")
 
 @export var coverage_radius: float = 600.0
-@export var capacity: int = 5
 
 var is_full: bool = false
 var is_grabbed: bool
 
 @onready var coverage_area_component: InteractionComponent = $CoverageAreaComponent
 @onready var house_collection_component: HouseCollectionComponent = $HouseCollectionComponent
-@onready
-var hover_house_collection_component: HouseCollectionComponent = $HoverHouseCollectionComponent
 @onready var pick_up_component: PickUpComponent = $PickUpComponent
 @onready var edges_component: EdgesComponent = $EdgesComponent
-@onready var hover_area_component: InteractionComponent = $HoverAreaComponent
-@onready var capacity_component: CapacityComponent = $CapacityComponent
 @onready var full_label: Label = $FullLabel
 @onready var building_component: BuildingComponent = $BuildingComponent
+@onready var _capacity_component: CapacityComponent = $CapacityComponent
 
 
 static func new_instance(mouse_tile_position: Vector2i) -> Mailbox:
@@ -34,17 +29,19 @@ static func new_instance(mouse_tile_position: Vector2i) -> Mailbox:
 func _ready() -> void:
 	coverage_area_component.area_entered.connect(_on_coverage_area_entered)
 	coverage_area_component.area_exited.connect(_on_coverage_area_exited)
-	hover_area_component.area_entered.connect(_on_hover_area_entered)
-	hover_area_component.area_exited.connect(_on_hover_area_exited)
 	pick_up_component.grabbed.connect(_on_grabbed)
 	pick_up_component.placed.connect(_on_placed)
-	capacity_component.changed.connect(_on_capacity_changed)
-	capacity_component.capacity = capacity
 	full_label.visible = false
 
 
-func deliver_mail(mail: Mail) -> void:
-	capacity_component.deposit_mail(mail)
+func deposit_mail(mail: Mail) -> void:
+	_capacity_component.deposit_mail(mail)
+	_capacity_changed()
+
+
+func collect_mail() -> Array[Mail]:
+	_capacity_changed.call_deferred()
+	return _capacity_component.collect_mail()
 
 
 func get_center_position() -> Vector2:
@@ -60,11 +57,19 @@ func _draw() -> void:
 		)
 
 
+func _capacity_changed() -> void:
+	is_full = _capacity_component.is_full()
+	full_label.visible = is_full
+	for house in house_collection_component.get_houses():
+		if is_full:
+			house.unregister_mailbox(self)
+		else:
+			house.register_mailbox(self)
+
+
 func _on_grabbed() -> void:
 	is_grabbed = true
 	queue_redraw()
-	coverage_area_component.monitoring = false
-	hover_area_component.monitoring = true
 	edges_component.redraw_edges = true
 	grabbed.emit()
 
@@ -72,9 +77,6 @@ func _on_grabbed() -> void:
 func _on_placed() -> void:
 	is_grabbed = false
 	queue_redraw()
-	if not is_full:
-		coverage_area_component.monitoring = true
-	hover_area_component.monitoring = false
 	edges_component.redraw_edges = false
 	placed.emit()
 
@@ -95,37 +97,3 @@ func _on_coverage_area_exited(area: Area2D) -> void:
 		edges_component.draw_edges(house_collection_component.get_global_positions())
 	elif area is PostOffice:
 		(area as PostOffice).mailbox_collection_component.remove(self)
-
-
-func _on_hover_area_entered(area: Area2D) -> void:
-	if not area is House:
-		return
-	hover_house_collection_component.add(area)
-	edges_component.draw_edges(hover_house_collection_component.get_global_positions())
-
-
-func _on_hover_area_exited(area: Area2D) -> void:
-	if not area is House:
-		return
-	hover_house_collection_component.remove(area)
-	edges_component.draw_edges(hover_house_collection_component.get_global_positions())
-
-
-func _on_capacity_changed() -> void:
-	if capacity_component.is_full():
-		_update_mailbox_full()
-	else:
-		_update_mailbox_not_full()
-
-
-func _update_mailbox_not_full() -> void:
-	coverage_area_component.monitoring = true
-	is_full = false
-	full_label.visible = false
-
-
-func _update_mailbox_full() -> void:
-	coverage_area_component.monitoring = false
-	is_full = true
-	full_label.visible = true
-	full.emit()

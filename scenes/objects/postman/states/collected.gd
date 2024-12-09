@@ -17,5 +17,5 @@ func enter(_previous_state_path: String, data := {}) -> void:
 
 func _collect_mail(data: Dictionary) -> Array[Mail]:
 	if data.DATA_SELECTED_MAILBOX is Mailbox:
-		return (data.DATA_SELECTED_MAILBOX as Mailbox).capacity_component.collect_mail()
+		return (data.DATA_SELECTED_MAILBOX as Mailbox).collect_mail()
 	return []

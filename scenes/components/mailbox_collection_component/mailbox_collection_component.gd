@@ -1,28 +1,17 @@
 class_name MailboxCollectionComponent
 extends Node
 
-signal first_added
+signal collection_changed
 
 var _collection: Array[Mailbox] = []
-
-
-func get_collection() -> Array[Mailbox]:
-	return _collection
 
 
 func get_copy() -> Array[Mailbox]:
 	return _collection.duplicate()
 
 
-func get_closest_mailbox() -> Mailbox:
-	if _collection.size() <= 0:
-		return
-
-	return _collection[0]
-
-
-func count() -> int:
-	return _collection.size()
+func has_available_mailbox() -> int:
+	return _collection.size() > 0
 
 
 func add(mailbox: Mailbox) -> void:
@@ -30,13 +19,15 @@ func add(mailbox: Mailbox) -> void:
 		return
 
 	_collection.push_back(mailbox)
-
-	if _collection.size() == 1:
-		first_added.emit()
+	collection_changed.emit()
 
 
 func remove(mailbox: Mailbox) -> void:
+	if not _collection.has(mailbox):
+		return
+
 	_collection.erase(mailbox)
+	collection_changed.emit()
 
 
 func get_global_positions() -> Array[Vector2]:
@@ -47,9 +38,9 @@ func get_global_positions() -> Array[Vector2]:
 
 
 func get_mailbox_closest_to(destination: Vector2) -> Mailbox:
-	if _collection.size() <= 0:
-		return null
 	var copy := _collection.duplicate()
+	if copy.size() <= 0:
+		return null
 	copy.sort_custom(_sort_by_distance_to_destination.bind(destination))
 	return copy[0]
 
