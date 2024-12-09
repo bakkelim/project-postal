@@ -10,8 +10,8 @@ extends Area2D
 
 
 func _ready() -> void:
-	coverage_area_component.body_entered.connect(_on_body_entered)
-	coverage_area_component.body_exited.connect(_on_body_exited)
+	coverage_area_component.area_entered.connect(_on_coverage_area_entered)
+	coverage_area_component.area_exited.connect(_on_coverage_area_exited)
 
 
 func get_center_position() -> Vector2:
@@ -37,23 +37,23 @@ func _on_mailbox_placed(mailbox: Mailbox) -> void:
 	edges_component.redraw_edges = false
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body is House:
-		house_collection_component.add(body)
+func _on_coverage_area_entered(area: Area2D) -> void:
+	if area is House:
+		house_collection_component.add(area)
 		#edges_component.draw_edges(_get_global_positions())
-	elif body is Mailbox:
-		mailbox_collection_component.add(body)
+	elif area is Mailbox:
+		mailbox_collection_component.add(area)
 		#edges_component.draw_edges(_get_global_positions())
-		body.grabbed.connect(_on_mailbox_grabbed.bind(body))
-		body.placed.connect(_on_mailbox_placed.bind(body))
+		area.grabbed.connect(_on_mailbox_grabbed.bind(area))
+		area.placed.connect(_on_mailbox_placed.bind(area))
 
 
-func _on_body_exited(body: Node2D) -> void:
-	if body is House:
-		house_collection_component.remove(body)
+func _on_coverage_area_exited(area: Area2D) -> void:
+	if area is House:
+		house_collection_component.remove(area)
 		#edges_component.draw_edges(_get_global_positions())
-	elif body is Mailbox:
-		mailbox_collection_component.remove(body)
+	elif area is Mailbox:
+		mailbox_collection_component.remove(area)
 		#edges_component.draw_edges(_get_global_positions())
-		body.grabbed.disconnect(_on_mailbox_grabbed)
-		body.placed.disconnect(_on_mailbox_placed)
+		area.grabbed.disconnect(_on_mailbox_grabbed)
+		area.placed.disconnect(_on_mailbox_placed)

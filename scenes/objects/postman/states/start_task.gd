@@ -10,7 +10,7 @@ func enter(_previous_state_path: String, data := {}) -> void:
 	if postman.current_task == postman.Tasks.COLLECTING:
 		var mailboxes_to_visit := postman.mailbox_collection_component.get_copy()
 		if mailboxes_to_visit.size() <= 0:
-			postman.mailbox_collection_component.first_added.connect(_on_first_added)
+			postman.mailbox_collection_component.collection_changed.connect(_on_first_added)
 		else:
 			var selected_mailbox: Mailbox = mailboxes_to_visit.pop_back()
 			data.DATA_SELECTED_MAILBOX = selected_mailbox
@@ -23,8 +23,8 @@ func enter(_previous_state_path: String, data := {}) -> void:
 
 
 func exit() -> void:
-	if postman.mailbox_collection_component.first_added.is_connected(_on_first_added):
-		postman.mailbox_collection_component.first_added.disconnect(_on_first_added)
+	if postman.mailbox_collection_component.collection_changed.is_connected(_on_first_added):
+		postman.mailbox_collection_component.collection_changed.disconnect(_on_first_added)
 
 
 func _on_first_added() -> void:

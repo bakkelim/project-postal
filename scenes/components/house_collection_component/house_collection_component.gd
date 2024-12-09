@@ -4,7 +4,7 @@ extends Node
 var _collection: Array[House] = []
 
 
-func get_collection() -> Array[House]:
+func get_houses() -> Array[House]:
 	return _collection
 
 

@@ -21,6 +21,8 @@ house_root = NodePath("../Houses")
 spawn_manager = NodePath("../SpawnManager")
 
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("house_root") instance=ExtResource("4_kmrci")]
+min_spawn_time = 0.4
+max_spawn_time = 1.0
 house_root = NodePath("../Houses")
 
 [node name="BuildUI" parent="." instance=ExtResource("1_t1k2b")]
