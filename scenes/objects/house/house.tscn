@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yoy84"]
 size = Vector2(128, 128)
 
-[node name="House" type="StaticBody2D" groups=["houses"]]
+[node name="House" type="Area2D" groups=["houses"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_w4lp1")

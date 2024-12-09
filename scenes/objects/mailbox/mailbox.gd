@@ -1,5 +1,5 @@
 class_name Mailbox
-extends StaticBody2D
+extends Area2D
 
 signal grabbed
 signal placed
@@ -32,10 +32,10 @@ static func new_instance(mouse_tile_position: Vector2i) -> Mailbox:
 
 
 func _ready() -> void:
-	coverage_area_component.body_entered.connect(_on_body_entered)
-	coverage_area_component.body_exited.connect(_on_body_exited)
-	hover_area_component.body_entered.connect(_on_hover_entered)
-	hover_area_component.body_exited.connect(_on_hover_exited)
+	coverage_area_component.area_entered.connect(_on_coverage_area_entered)
+	coverage_area_component.area_exited.connect(_on_coverage_area_exited)
+	hover_area_component.area_entered.connect(_on_hover_area_entered)
+	hover_area_component.area_exited.connect(_on_hover_area_exited)
 	pick_up_component.grabbed.connect(_on_grabbed)
 	pick_up_component.placed.connect(_on_placed)
 	capacity_component.changed.connect(_on_capacity_changed)
@@ -55,7 +55,9 @@ func get_center_position() -> Vector2:
 
 func _draw() -> void:
 	if is_grabbed:
-		draw_circle(Vector2(0, 0), coverage_radius, Color(0, 0.980392, 0.603922, .1))
+		draw_circle(
+			to_local(get_center_position()), coverage_radius, Color(0, 0.980392, 0.603922, .1)
+		)
 
 
 func _on_grabbed() -> void:
@@ -77,35 +79,35 @@ func _on_placed() -> void:
 	placed.emit()
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body is House:
-		house_collection_component.add(body)
-		(body as House).register_mailbox(self)
+func _on_coverage_area_entered(area: Area2D) -> void:
+	if area is House:
+		house_collection_component.add(area)
+		(area as House).register_mailbox(self)
 		edges_component.draw_edges(house_collection_component.get_global_positions())
-	elif body is PostOffice:
-		(body as PostOffice).mailbox_collection_component.add(self)
+	elif area is PostOffice:
+		(area as PostOffice).mailbox_collection_component.add(self)
 
 
-func _on_body_exited(body: Node2D) -> void:
-	if body is House:
-		house_collection_component.remove(body)
-		(body as House).unregister_mailbox(self)
+func _on_coverage_area_exited(area: Area2D) -> void:
+	if area is House:
+		house_collection_component.remove(area)
+		(area as House).unregister_mailbox(self)
 		edges_component.draw_edges(house_collection_component.get_global_positions())
-	elif body is PostOffice:
-		(body as PostOffice).mailbox_collection_component.remove(self)
+	elif area is PostOffice:
+		(area as PostOffice).mailbox_collection_component.remove(self)
 
 
-func _on_hover_entered(body: Node2D) -> void:
-	if not body is House:
+func _on_hover_area_entered(area: Area2D) -> void:
+	if not area is House:
 		return
-	hover_house_collection_component.add(body)
+	hover_house_collection_component.add(area)
 	edges_component.draw_edges(hover_house_collection_component.get_global_positions())
 
 
-func _on_hover_exited(body: Node2D) -> void:
-	if not body is House:
+func _on_hover_area_exited(area: Area2D) -> void:
+	if not area is House:
 		return
-	hover_house_collection_component.remove(body)
+	hover_house_collection_component.remove(area)
 	edges_component.draw_edges(hover_house_collection_component.get_global_positions())
 
 

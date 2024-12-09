@@ -1,5 +1,5 @@
 class_name House
-extends StaticBody2D
+extends Area2D
 
 const Scene: PackedScene = preload("res://scenes/objects/house/house.tscn")
 

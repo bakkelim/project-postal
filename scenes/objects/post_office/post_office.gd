@@ -1,5 +1,5 @@
 class_name PostOffice
-extends StaticBody2D
+extends Area2D
 
 @onready var mailbox_collection_component: MailboxCollectionComponent = $MailboxCollectionComponent
 @onready var house_collection_component: HouseCollectionComponent = $HouseCollectionComponent

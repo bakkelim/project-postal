@@ -17,11 +17,13 @@ load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.cte
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q23af"]
 size = Vector2(128, 128)
 
-[node name="Mailbox" type="StaticBody2D"]
+[node name="Mailbox" type="Area2D"]
 scale = Vector2(0.5, 0.5)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_yr54c")
+coverage_radius = null
+capacity = null
 
 [node name="PickUpComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_fr46o")]
 sprite = NodePath("../Sprite2D")
@@ -79,3 +81,6 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 96
 text = "!"
+
+[connection signal="body_entered" from="CoverageAreaComponent" to="CoverageAreaComponent" method="_on_body_entered"]
+[connection signal="body_entered" from="HoverAreaComponent" to="HoverAreaComponent" method="_on_body_entered"]
