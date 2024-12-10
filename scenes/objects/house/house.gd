@@ -3,8 +3,6 @@ extends Area2D
 
 const Scene: PackedScene = preload("res://scenes/objects/house/house.tscn")
 
-static var house_counter := 0
-
 var id: String
 var received_mail_count: int = 0:
 	set(value):
@@ -15,6 +13,8 @@ var received_mail_count: int = 0:
 @onready var connected_label: Label = $ConnectedLabel
 @onready var received_mails_label: Label = $ReceivedMailsLabel
 @onready var building_component: BuildingComponent = $BuildingComponent
+
+static var house_counter := 0
 
 
 static func new_instance(tile_position: Vector2i) -> House:

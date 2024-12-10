@@ -71,6 +71,8 @@ func _on_grabbed() -> void:
 	is_grabbed = true
 	queue_redraw()
 	edges_component.redraw_edges = true
+	for house in house_collection_component.get_houses():
+		house.unregister_mailbox(self)
 	grabbed.emit()
 
 
@@ -78,6 +80,8 @@ func _on_placed() -> void:
 	is_grabbed = false
 	queue_redraw()
 	edges_component.redraw_edges = false
+	for house in house_collection_component.get_houses():
+		house.register_mailbox(self)
 	placed.emit()
 
 
