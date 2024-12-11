@@ -4,7 +4,6 @@ extends Area2D
 @onready var mailbox_collection_component: MailboxCollectionComponent = $MailboxCollectionComponent
 @onready var house_collection_component: HouseCollectionComponent = $HouseCollectionComponent
 @onready var coverage_area_component: InteractionComponent = $CoverageAreaComponent
-@onready var edges_component: EdgesComponent = $EdgesComponent
 @onready var postman: Postman = $Postman
 @onready var building_component: BuildingComponent = $BuildingComponent
 
@@ -29,21 +28,17 @@ func _get_global_positions() -> Array[Vector2]:
 
 func _on_mailbox_grabbed(mailbox: Mailbox) -> void:
 	mailbox_collection_component.remove(mailbox)
-	edges_component.redraw_edges = true
 
 
 func _on_mailbox_placed(mailbox: Mailbox) -> void:
 	mailbox_collection_component.add(mailbox)
-	edges_component.redraw_edges = false
 
 
 func _on_coverage_area_entered(area: Area2D) -> void:
 	if area is House:
 		house_collection_component.add(area)
-		#edges_component.draw_edges(_get_global_positions())
 	elif area is Mailbox:
 		mailbox_collection_component.add(area)
-		#edges_component.draw_edges(_get_global_positions())
 		area.grabbed.connect(_on_mailbox_grabbed.bind(area))
 		area.placed.connect(_on_mailbox_placed.bind(area))
 
@@ -51,9 +46,7 @@ func _on_coverage_area_entered(area: Area2D) -> void:
 func _on_coverage_area_exited(area: Area2D) -> void:
 	if area is House:
 		house_collection_component.remove(area)
-		#edges_component.draw_edges(_get_global_positions())
 	elif area is Mailbox:
 		mailbox_collection_component.remove(area)
-		#edges_component.draw_edges(_get_global_positions())
 		area.grabbed.disconnect(_on_mailbox_grabbed)
 		area.placed.disconnect(_on_mailbox_placed)

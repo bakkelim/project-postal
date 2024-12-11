@@ -45,3 +45,4 @@ mouse_left={
 2d_physics/layer_3="mailbox"
 2d_physics/layer_4="post_office"
 2d_physics/layer_5="postman"
+2d_physics/layer_7="mailbox_coverage_area"
