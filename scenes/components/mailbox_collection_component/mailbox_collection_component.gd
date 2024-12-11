@@ -18,6 +18,9 @@ func add(mailbox: Mailbox) -> void:
 	if _collection.has(mailbox):
 		return
 
+	mailbox.capacity_changed.connect(_on_capacity_changed)
+	mailbox.grabbed.connect(_on_grabbed)
+	mailbox.placed.connect(_on_placed)
 	_collection.push_back(mailbox)
 	collection_changed.emit()
 
@@ -26,6 +29,9 @@ func remove(mailbox: Mailbox) -> void:
 	if not _collection.has(mailbox):
 		return
 
+	mailbox.capacity_changed.disconnect(_on_capacity_changed)
+	mailbox.grabbed.disconnect(_on_grabbed)
+	mailbox.placed.disconnect(_on_placed)
 	_collection.erase(mailbox)
 	collection_changed.emit()
 
@@ -33,12 +39,16 @@ func remove(mailbox: Mailbox) -> void:
 func get_global_positions() -> Array[Vector2]:
 	var global_positions: Array[Vector2] = []
 	for c in _collection:
-		global_positions.push_back(c.global_position)
+		global_positions.push_back(c.get_center_position())
 	return global_positions
 
 
 func get_mailbox_closest_to(destination: Vector2) -> Mailbox:
-	var copy := _collection.duplicate()
+	var copy := (
+		_collection
+		. filter(func(m: Mailbox): return not m.is_grabbed)
+		. filter(func(m: Mailbox): return not m.is_full)
+	)
 	if copy.size() <= 0:
 		return null
 	copy.sort_custom(_sort_by_distance_to_destination.bind(destination))
@@ -51,3 +61,15 @@ func _sort_by_distance_to_destination(
 	var distance_to_mailbox1 := destination.distance_to(mailbox1.global_position)
 	var distance_to_mailbox2 := destination.distance_to(mailbox2.global_position)
 	return distance_to_mailbox1 < distance_to_mailbox2
+
+
+func _on_capacity_changed(_is_full: bool) -> void:
+	collection_changed.emit()
+
+
+func _on_grabbed() -> void:
+	collection_changed.emit()
+
+
+func _on_placed() -> void:
+	collection_changed.emit()

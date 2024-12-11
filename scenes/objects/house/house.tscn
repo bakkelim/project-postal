@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp56vfnhiyypd"]
+[gd_scene load_steps=8 format=3 uid="uid://cp56vfnhiyypd"]
 
 [ext_resource type="Script" path="res://scenes/objects/house/house.gd" id="1_w4lp1"]
 [ext_resource type="Texture2D" uid="uid://bwtm34vltctw" path="res://icon.svg" id="2_f50h4"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bph7ijiy5wy78" path="res://scenes/objects/resident/resident.tscn" id="6_udono"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yoy84"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51wyx"]
 size = Vector2(128, 128)
 
 [node name="House" type="Area2D" groups=["houses"]]
@@ -58,3 +61,11 @@ offset_bottom = 25.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "0"
+
+[node name="MailboxDetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MailboxDetectionArea"]
+position = Vector2(64, 64)
+shape = SubResource("RectangleShape2D_51wyx")

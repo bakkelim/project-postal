@@ -3,6 +3,7 @@ extends Area2D
 
 signal grabbed
 signal placed
+signal capacity_changed(is_full: bool)
 
 const Scene: PackedScene = preload("res://scenes/objects/mailbox/mailbox.tscn")
 
@@ -11,13 +12,13 @@ const Scene: PackedScene = preload("res://scenes/objects/mailbox/mailbox.tscn")
 var is_full: bool = false
 var is_grabbed: bool
 
-@onready var coverage_area_component: InteractionComponent = $CoverageAreaComponent
-@onready var house_collection_component: HouseCollectionComponent = $HouseCollectionComponent
 @onready var pick_up_component: PickUpComponent = $PickUpComponent
-@onready var edges_component: EdgesComponent = $EdgesComponent
 @onready var full_label: Label = $FullLabel
 @onready var building_component: BuildingComponent = $BuildingComponent
+@onready var _house_collection_component: HouseCollectionComponent = $HouseCollectionComponent
+@onready var _edges_component: EdgesComponent = $EdgesComponent
 @onready var _capacity_component: CapacityComponent = $CapacityComponent
+@onready var _coverage_area_component: Area2D = $CoverageAreaComponent
 
 
 static func new_instance(mouse_tile_position: Vector2i) -> Mailbox:
@@ -27,8 +28,8 @@ static func new_instance(mouse_tile_position: Vector2i) -> Mailbox:
 
 
 func _ready() -> void:
-	coverage_area_component.area_entered.connect(_on_coverage_area_entered)
-	coverage_area_component.area_exited.connect(_on_coverage_area_exited)
+	_coverage_area_component.area_entered.connect(_on_coverage_area_entered)
+	_coverage_area_component.area_exited.connect(_on_coverage_area_exited)
 	pick_up_component.grabbed.connect(_on_grabbed)
 	pick_up_component.placed.connect(_on_placed)
 	full_label.visible = false
@@ -60,44 +61,34 @@ func _draw() -> void:
 func _capacity_changed() -> void:
 	is_full = _capacity_component.is_full()
 	full_label.visible = is_full
-	for house in house_collection_component.get_houses():
-		if is_full:
-			house.unregister_mailbox(self)
-		else:
-			house.register_mailbox(self)
+	capacity_changed.emit(is_full)
 
 
 func _on_grabbed() -> void:
 	is_grabbed = true
 	queue_redraw()
-	edges_component.redraw_edges = true
-	for house in house_collection_component.get_houses():
-		house.unregister_mailbox(self)
+	_edges_component.redraw_edges = true
 	grabbed.emit()
 
 
 func _on_placed() -> void:
 	is_grabbed = false
 	queue_redraw()
-	edges_component.redraw_edges = false
-	for house in house_collection_component.get_houses():
-		house.register_mailbox(self)
+	_edges_component.redraw_edges = false
 	placed.emit()
 
 
 func _on_coverage_area_entered(area: Area2D) -> void:
-	if area is House:
-		house_collection_component.add(area)
-		(area as House).register_mailbox(self)
-		edges_component.draw_edges(house_collection_component.get_global_positions())
-	elif area is PostOffice:
-		(area as PostOffice).mailbox_collection_component.add(self)
+	if not area is House:
+		return
+
+	_house_collection_component.add(area)
+	_edges_component.draw_edges(_house_collection_component.get_global_positions())
 
 
 func _on_coverage_area_exited(area: Area2D) -> void:
-	if area is House:
-		house_collection_component.remove(area)
-		(area as House).unregister_mailbox(self)
-		edges_component.draw_edges(house_collection_component.get_global_positions())
-	elif area is PostOffice:
-		(area as PostOffice).mailbox_collection_component.remove(self)
+	if not area is House:
+		return
+
+	_house_collection_component.remove(area)
+	_edges_component.draw_edges(_house_collection_component.get_global_positions())

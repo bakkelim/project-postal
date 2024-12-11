@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dr6bb5kmi6wug"]
+[gd_scene load_steps=10 format=3 uid="uid://dr6bb5kmi6wug"]
 
 [ext_resource type="Texture2D" uid="uid://bwtm34vltctw" path="res://icon.svg" id="1_i1s2v"]
 [ext_resource type="Script" path="res://scenes/objects/post_office/post_office.gd" id="1_iqjvn"]
 [ext_resource type="PackedScene" uid="uid://cijss2taso5eg" path="res://scenes/components/mailbox_collection_component/mailbox_collection_component.tscn" id="2_0it5v"]
-[ext_resource type="PackedScene" uid="uid://bbfe4b3tfbxtk" path="res://scenes/components/edges_component/edges_component.tscn" id="2_goxbw"]
 [ext_resource type="PackedScene" uid="uid://dhgq1vmc7nila" path="res://scenes/components/interaction_component/interaction_component.tscn" id="2_ihf54"]
 [ext_resource type="PackedScene" uid="uid://cfggfmh5qixij" path="res://scenes/components/house_collection_component/house_collection_component.tscn" id="3_hq7kp"]
 [ext_resource type="PackedScene" uid="uid://du6cofmiqp1x8" path="res://scenes/components/building_component/building_component.tscn" id="4_ldb8l"]
@@ -26,8 +25,6 @@ script = ExtResource("1_iqjvn")
 
 [node name="BuildingComponent" parent="." instance=ExtResource("4_ldb8l")]
 dimensions = Vector2i(4, 2)
-
-[node name="EdgesComponent" parent="." instance=ExtResource("2_goxbw")]
 
 [node name="CoverageAreaComponent" parent="." instance=ExtResource("2_ihf54")]
 position = Vector2(128, 64)

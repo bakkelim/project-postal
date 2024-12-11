@@ -21,5 +21,7 @@ func exit() -> void:
 
 func _on_first_added() -> void:
 	var selected_mailbox := resident.get_closest_mailbox()
+	if not selected_mailbox:
+		return
 	_data.DATA_SELECTED_MAILBOX = selected_mailbox
 	finished.emit(WALKING_TO_MAILBOX, _data)
