@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://bph7ijiy5wy78" path="res://scenes/objects/resident/resident.tscn" id="6_udono"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yoy84"]
-size = Vector2(128, 128)
+size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51wyx"]
-size = Vector2(128, 128)
+size = Vector2(64, 64)
 
 [node name="House" type="Area2D" groups=["houses"]]
 collision_layer = 2
@@ -20,38 +20,39 @@ script = ExtResource("1_w4lp1")
 [node name="MailboxCollectionComponent" parent="." instance=ExtResource("4_vp22r")]
 
 [node name="BuildingComponent" parent="." instance=ExtResource("3_kgce4")]
-dimensions = Vector2i(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_f50h4")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(64, 64)
+position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_yoy84")
 
 [node name="Resident" parent="." node_paths=PackedStringArray("mailbox_collection_component", "progress_bar") instance=ExtResource("6_udono")]
-position = Vector2(64, 64)
+position = Vector2(32, 32)
 mailbox_collection_component = NodePath("../MailboxCollectionComponent")
 progress_bar = NodePath("../ProduceMailProgressBar")
 
 [node name="ConnectedLabel" type="Label" parent="."]
-offset_left = 107.0
-offset_right = 147.0
+offset_left = 54.0
+offset_right = 94.0
 offset_bottom = 45.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 text = "!"
 
 [node name="ProduceMailProgressBar" type="ProgressBar" parent="."]
-custom_minimum_size = Vector2(100, 10)
-offset_left = 14.0
-offset_top = 96.0
-offset_right = 114.0
-offset_bottom = 123.0
+custom_minimum_size = Vector2(50, 5)
+offset_left = 8.0
+offset_top = 53.0
+offset_right = 58.0
+offset_bottom = 63.0
 mouse_filter = 2
 value = 50.0
+show_percentage = false
 
 [node name="ReceivedMailsLabel" type="Label" parent="."]
 offset_left = 8.0
@@ -67,5 +68,5 @@ collision_layer = 0
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MailboxDetectionArea"]
-position = Vector2(64, 64)
+position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_51wyx")
