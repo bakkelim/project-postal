@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt5hy6ytg3lh"]
+
+[ext_resource type="Script" path="res://scenes/managers/road_manager/road_manager.gd" id="1_k8kxx"]
+
+[node name="RoadManager" type="Node"]
+script = ExtResource("1_k8kxx")

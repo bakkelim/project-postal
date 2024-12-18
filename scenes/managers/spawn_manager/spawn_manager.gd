@@ -6,11 +6,14 @@ signal spawn_timeout
 @export var min_spawn_time: float = 4
 @export var max_spawn_time: float = 10
 @export var house_root: Node
+@export var enabled: bool = true
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
 
 func _ready() -> void:
+	if not enabled:
+		return
 	spawn_timer.timeout.connect(_on_spawn_timeout)
 	spawn_timer.one_shot = true
 	spawn_timer.autostart = false
