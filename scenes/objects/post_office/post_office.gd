@@ -12,10 +12,10 @@ extends Area2D
 func _ready() -> void:
 	var sprite_size := _sprite.texture.get_size()
 	_sprite.scale = Vector2(
-		(GameState.tile_size / sprite_size.x) * _building_component.dimensions.x, 
+		(GameState.tile_size / sprite_size.x) * _building_component.dimensions.x,
 		(GameState.tile_size / sprite_size.y) * _building_component.dimensions.y
-		)
-	
+	)
+
 	coverage_area_component.area_entered.connect(_on_coverage_area_entered)
 	coverage_area_component.area_exited.connect(_on_coverage_area_exited)
 

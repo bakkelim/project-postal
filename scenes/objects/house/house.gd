@@ -14,8 +14,8 @@ var received_mail_count: int = 0:
 @onready var mailbox_collection_component: MailboxCollectionComponent = $MailboxCollectionComponent
 @onready var connected_label: Label = $ConnectedLabel
 @onready var received_mails_label: Label = $ReceivedMailsLabel
-@onready var _building_component: BuildingComponent = $BuildingComponent
 @onready var mailbox_detection_area: Area2D = $MailboxDetectionArea
+@onready var _building_component: BuildingComponent = $BuildingComponent
 @onready var _sprite: Sprite2D = $Sprite2D
 
 
@@ -32,7 +32,9 @@ func _init() -> void:
 
 func _ready() -> void:
 	var sprite_size := _sprite.texture.get_size()
-	_sprite.scale = Vector2(GameState.tile_size / sprite_size.x, GameState.tile_size / sprite_size.y)
+	_sprite.scale = Vector2(
+		GameState.tile_size / sprite_size.x, GameState.tile_size / sprite_size.y
+	)
 	mailbox_detection_area.area_entered.connect(_on_mailbox_detection_area_entered)
 	mailbox_detection_area.area_exited.connect(_on_mailbox_detection_area_exited)
 

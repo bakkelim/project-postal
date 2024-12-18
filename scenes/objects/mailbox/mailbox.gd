@@ -30,8 +30,10 @@ static func new_instance(mouse_tile_position: Vector2i) -> Mailbox:
 
 func _ready() -> void:
 	var sprite_size := _sprite.texture.get_size()
-	_sprite.scale = Vector2(GameState.tile_size / sprite_size.x, GameState.tile_size / sprite_size.y)
-	
+	_sprite.scale = Vector2(
+		GameState.tile_size / sprite_size.x, GameState.tile_size / sprite_size.y
+	)
+
 	_coverage_area_component.area_entered.connect(_on_coverage_area_entered)
 	_coverage_area_component.area_exited.connect(_on_coverage_area_exited)
 	pick_up_component.grabbed.connect(_on_grabbed)

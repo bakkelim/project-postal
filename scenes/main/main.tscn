@@ -15,17 +15,17 @@ script = ExtResource("1_kf64e")
 highlight_tile_map_layer = NodePath("../TileMapLayer")
 road_manager = NodePath("../RoadManager")
 
-[node name="BuildingManager" parent="." node_paths=PackedStringArray("build_ui", "grid_manager", "mailbox_root", "house_root", "spawn_manager") instance=ExtResource("3_bdker")]
+[node name="BuildingManager" parent="." node_paths=PackedStringArray("build_ui", "grid_manager", "mailbox_root", "house_root") instance=ExtResource("3_bdker")]
 build_ui = NodePath("../BuildUI")
 grid_manager = NodePath("../GridManager")
 mailbox_root = NodePath("../Mailboxes")
 house_root = NodePath("../Houses")
-spawn_manager = NodePath("../SpawnManager")
 
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("house_root") instance=ExtResource("4_kmrci")]
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("house_root", "grid_manager") instance=ExtResource("4_kmrci")]
 min_spawn_time = 0.4
 max_spawn_time = 1.0
 house_root = NodePath("../Houses")
+grid_manager = NodePath("../GridManager")
 
 [node name="RoadManager" parent="." instance=ExtResource("5_1pmqi")]
 

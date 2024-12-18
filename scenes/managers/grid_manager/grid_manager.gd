@@ -41,8 +41,8 @@ func get_random_free_area(size: Vector2i) -> Vector2:
 	while not has_valid_position:
 		if counter >= 5:
 			return Vector2i.ZERO
-		var random_x := randi_range(0, viewpost_size.x - 128)
-		var random_y := randi_range(0, viewpost_size.y - 128)
+		var random_x := randi_range(0, viewpost_size.x - (GameState.tile_size * 2))
+		var random_y := randi_range(0, viewpost_size.y - (GameState.tile_size * 2))
 		var random_position := Vector2i(random_x, random_y)
 		random_tile = position_to_grid(random_position)
 		var tile_positions := _get_tile_positions(random_tile, size)

@@ -6,8 +6,10 @@ var _astargrid: AStarGrid2D
 
 func _ready() -> void:
 	_astargrid = AStarGrid2D.new()
-	_astargrid.size = Vector2i(1152 / GameState.tile_size, 648 / GameState.tile_size)
-	_astargrid.cell_size = Vector2i(GameState.tile_size,GameState.tile_size)
+	_astargrid.region = Rect2i(
+		Vector2i.ZERO, Vector2i(1152 / GameState.tile_size, 648 / GameState.tile_size)
+	)
+	_astargrid.cell_size = Vector2i(GameState.tile_size, GameState.tile_size)
 	_astargrid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	_astargrid.jumping_enabled = false
 	_astargrid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
