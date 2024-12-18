@@ -15,6 +15,8 @@ func start_animation(destination: Vector2) -> void:
 	var distance := from.distance_to(destination)
 	var animation_time := distance / speed
 
+	body.look_at(destination)
+
 	tween = create_tween()
 	tween.tween_property(body, "global_position", destination, animation_time)
 	tween.tween_callback(_on_animation_finished)

@@ -33,9 +33,9 @@ grid_manager = NodePath("../GridManager")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
+[node name="PostOffice" parent="." instance=ExtResource("3_amkxi")]
+position = Vector2(448, 256)
+
 [node name="Mailboxes" type="Node" parent="."]
 
 [node name="Houses" type="Node" parent="."]
-
-[node name="PostOffice" parent="." instance=ExtResource("3_amkxi")]
-position = Vector2(448, 256)

@@ -6,21 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://bbfe4b3tfbxtk" path="res://scenes/components/edges_component/edges_component.tscn" id="4_w0d62"]
 [ext_resource type="PackedScene" uid="uid://bn63x0dh782ay" path="res://scenes/components/capacity_component/capacity_component.tscn" id="5_is8xa"]
 [ext_resource type="PackedScene" uid="uid://du6cofmiqp1x8" path="res://scenes/components/building_component/building_component.tscn" id="6_o2wma"]
+[ext_resource type="Texture2D" uid="uid://lw0ykmjn6cml" path="res://assets/post-box-1.png" id="7_nu7rb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok77w"]
-radius = 600.0
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e4eob"]
-load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+radius = 300.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q23af"]
-size = Vector2(128, 128)
+size = Vector2(64, 64)
 
 [node name="Mailbox" type="Area2D"]
-scale = Vector2(0.5, 0.5)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_yr54c")
+coverage_radius = 300.0
 
 [node name="PickUpComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_fr46o")]
 sprite = NodePath("../Sprite2D")
@@ -28,30 +26,28 @@ sprite = NodePath("../Sprite2D")
 [node name="HouseCollectionComponent" parent="." instance=ExtResource("3_8awm2")]
 
 [node name="EdgesComponent" parent="." instance=ExtResource("4_w0d62")]
-position = Vector2(64, 66)
+position = Vector2(32, 32)
 
 [node name="CapacityComponent" parent="." instance=ExtResource("5_is8xa")]
 z_index = 1
-position = Vector2(40, 82)
+position = Vector2(19, 32)
 
 [node name="BuildingComponent" parent="." instance=ExtResource("6_o2wma")]
 
 [node name="CoverageAreaComponent" type="Area2D" parent="."]
+position = Vector2(32, 32)
 collision_layer = 64
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CoverageAreaComponent"]
-position = Vector2(64, 66)
 shape = SubResource("CircleShape2D_ok77w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(32, 34)
-scale = Vector2(0.5, 0.5)
-texture = SubResource("CompressedTexture2D_e4eob")
+texture = ExtResource("7_nu7rb")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(64, 64)
+position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_q23af")
 
 [node name="FullLabel" type="Label" parent="."]
@@ -60,13 +56,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 86.0
-offset_top = 26.0
-offset_right = 112.0
-offset_bottom = 71.0
+offset_left = 37.0
+offset_top = 12.0
+offset_right = 63.0
+offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 text = "!"

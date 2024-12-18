@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://dr6bb5kmi6wug"]
 
-[ext_resource type="Texture2D" uid="uid://bwtm34vltctw" path="res://icon.svg" id="1_i1s2v"]
 [ext_resource type="Script" path="res://scenes/objects/post_office/post_office.gd" id="1_iqjvn"]
 [ext_resource type="PackedScene" uid="uid://cijss2taso5eg" path="res://scenes/components/mailbox_collection_component/mailbox_collection_component.tscn" id="2_0it5v"]
 [ext_resource type="PackedScene" uid="uid://dhgq1vmc7nila" path="res://scenes/components/interaction_component/interaction_component.tscn" id="2_ihf54"]
 [ext_resource type="PackedScene" uid="uid://cfggfmh5qixij" path="res://scenes/components/house_collection_component/house_collection_component.tscn" id="3_hq7kp"]
 [ext_resource type="PackedScene" uid="uid://du6cofmiqp1x8" path="res://scenes/components/building_component/building_component.tscn" id="4_ldb8l"]
+[ext_resource type="Texture2D" uid="uid://cqsbbaop81gaw" path="res://assets/post-office-1.png" id="6_f51b5"]
 [ext_resource type="PackedScene" uid="uid://dg6q66t2ct70s" path="res://scenes/objects/postman/postman.tscn" id="6_x1h2q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k28hx"]
@@ -37,11 +37,11 @@ shape = SubResource("CircleShape2D_k28hx")
 position = Vector2(64, 32)
 shape = SubResource("RectangleShape2D_w71b6")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1, 0.5)
-texture = ExtResource("1_i1s2v")
-centered = false
-
 [node name="Postman" parent="." node_paths=PackedStringArray("mailbox_collection_component") instance=ExtResource("6_x1h2q")]
 position = Vector2(64, 32)
 mailbox_collection_component = NodePath("../MailboxCollectionComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1, 0.5)
+texture = ExtResource("6_f51b5")
+centered = false

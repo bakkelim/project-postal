@@ -18,6 +18,7 @@ func enter(_previous_state_path: String, data := {}) -> void:
 
 func exit() -> void:
 	produce_mail_component.mail_produced.disconnect(_on_mail_produced)
+	resident.update_sprite_with_mail()
 
 
 func _on_mail_produced(mail: Mail) -> void:

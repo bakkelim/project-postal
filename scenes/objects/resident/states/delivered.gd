@@ -7,5 +7,6 @@ func enter(_previous_state_path: String, data := {}) -> void:
 	if not mailbox.is_full:
 		mailbox.deposit_mail(data.DATA_MAIL)
 		data.DATA_MAIL = null
+		resident.update_sprite_without_mail()
 
 	finished.emit(WALKING_TO_HOUSE, data)

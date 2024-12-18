@@ -1,16 +1,16 @@
 [gd_scene load_steps=8 format=3 uid="uid://cp56vfnhiyypd"]
 
 [ext_resource type="Script" path="res://scenes/objects/house/house.gd" id="1_w4lp1"]
-[ext_resource type="Texture2D" uid="uid://bwtm34vltctw" path="res://icon.svg" id="2_f50h4"]
 [ext_resource type="PackedScene" uid="uid://du6cofmiqp1x8" path="res://scenes/components/building_component/building_component.tscn" id="3_kgce4"]
+[ext_resource type="Texture2D" uid="uid://cccclrlcn83lc" path="res://assets/house-1.png" id="4_a11uh"]
 [ext_resource type="PackedScene" uid="uid://cijss2taso5eg" path="res://scenes/components/mailbox_collection_component/mailbox_collection_component.tscn" id="4_vp22r"]
 [ext_resource type="PackedScene" uid="uid://bph7ijiy5wy78" path="res://scenes/objects/resident/resident.tscn" id="6_udono"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yoy84"]
-size = Vector2(64, 64)
+size = Vector2(40, 51)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51wyx"]
-size = Vector2(64, 64)
+size = Vector2(42, 52)
 
 [node name="House" type="Area2D" groups=["houses"]]
 collision_layer = 2
@@ -21,13 +21,8 @@ script = ExtResource("1_w4lp1")
 
 [node name="BuildingComponent" parent="." instance=ExtResource("3_kgce4")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_f50h4")
-centered = false
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(32, 32)
+position = Vector2(32, 26)
 shape = SubResource("RectangleShape2D_yoy84")
 
 [node name="Resident" parent="." node_paths=PackedStringArray("mailbox_collection_component", "progress_bar") instance=ExtResource("6_udono")]
@@ -35,38 +30,43 @@ position = Vector2(32, 32)
 mailbox_collection_component = NodePath("../MailboxCollectionComponent")
 progress_bar = NodePath("../ProduceMailProgressBar")
 
-[node name="ConnectedLabel" type="Label" parent="."]
-offset_left = 54.0
-offset_right = 94.0
-offset_bottom = 45.0
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 16
-text = "!"
-
-[node name="ProduceMailProgressBar" type="ProgressBar" parent="."]
-custom_minimum_size = Vector2(50, 5)
-offset_left = 8.0
-offset_top = 53.0
-offset_right = 58.0
-offset_bottom = 63.0
-mouse_filter = 2
-value = 50.0
-show_percentage = false
-
-[node name="ReceivedMailsLabel" type="Label" parent="."]
-offset_left = 8.0
-offset_top = 2.0
-offset_right = 48.0
-offset_bottom = 25.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "0"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_a11uh")
+centered = false
 
 [node name="MailboxDetectionArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MailboxDetectionArea"]
-position = Vector2(32, 32)
+position = Vector2(32, 26)
 shape = SubResource("RectangleShape2D_51wyx")
+
+[node name="ConnectedLabel" type="Label" parent="."]
+offset_left = 45.0
+offset_top = -2.0
+offset_right = 85.0
+offset_bottom = 43.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "!"
+
+[node name="ProduceMailProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(32, 5)
+offset_left = 16.0
+offset_top = 45.0
+offset_right = 48.0
+offset_bottom = 50.0
+mouse_filter = 2
+value = 50.0
+show_percentage = false
+
+[node name="ReceivedMailsLabel" type="Label" parent="."]
+offset_left = 14.0
+offset_top = -2.0
+offset_right = 54.0
+offset_bottom = 21.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "0"
