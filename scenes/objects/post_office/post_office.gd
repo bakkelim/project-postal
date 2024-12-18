@@ -5,17 +5,24 @@ extends Area2D
 @onready var house_collection_component: HouseCollectionComponent = $HouseCollectionComponent
 @onready var coverage_area_component: InteractionComponent = $CoverageAreaComponent
 @onready var postman: Postman = $Postman
-@onready var building_component: BuildingComponent = $BuildingComponent
+@onready var _building_component: BuildingComponent = $BuildingComponent
+@onready var _sprite: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
+	var sprite_size := _sprite.texture.get_size()
+	_sprite.scale = Vector2(
+		(GameState.tile_size / sprite_size.x) * _building_component.dimensions.x, 
+		(GameState.tile_size / sprite_size.y) * _building_component.dimensions.y
+		)
+	
 	coverage_area_component.area_entered.connect(_on_coverage_area_entered)
 	coverage_area_component.area_exited.connect(_on_coverage_area_exited)
 
 
 func get_center_position() -> Vector2:
-	var x := global_position.x + (32 * building_component.dimensions.x)
-	var y := global_position.y + (32 * building_component.dimensions.y)
+	var x := global_position.x + ((GameState.tile_size / 2) * _building_component.dimensions.x)
+	var y := global_position.y + ((GameState.tile_size / 2) * _building_component.dimensions.y)
 	return Vector2(x, y)
 
 

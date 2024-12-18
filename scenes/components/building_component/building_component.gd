@@ -14,7 +14,7 @@ func get_building_area() -> Array[Vector2i]:
 
 
 func _get_tile_position() -> Vector2i:
-	var grid_position := global_position / 64
+	var grid_position := global_position / GameState.tile_size
 	grid_position = grid_position.floor()
 	return grid_position
 

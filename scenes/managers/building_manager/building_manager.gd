@@ -12,6 +12,7 @@ extends Node
 
 func _ready() -> void:
 	cursor.visible = false
+	cursor.texture.size = Vector2(GameState.tile_size, GameState.tile_size)
 	build_ui.place_mailbox_button_pressed.connect(_on_place_mailbox_button_pressed)
 	spawn_manager.spawn_timeout.connect(_on_spawn_timeout)
 
@@ -20,7 +21,7 @@ func _process(_delta: float) -> void:
 	if not cursor.visible:
 		return
 	var grid_position := grid_manager.get_mouse_tile_position()
-	cursor.global_position = grid_position * 64
+	cursor.global_position = grid_position * GameState.tile_size
 
 
 func _unhandled_input(event: InputEvent) -> void:

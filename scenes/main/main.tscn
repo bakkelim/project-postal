@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bk5agr7vpneyh"]
+[gd_scene load_steps=8 format=3 uid="uid://bk5agr7vpneyh"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_kf64e"]
 [ext_resource type="PackedScene" uid="uid://8vbmvorcaa82" path="res://scenes/ui/build_ui/build_ui.tscn" id="1_t1k2b"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cd3x4amq05w5g" path="res://scenes/managers/building_manager/building_manager.tscn" id="3_bdker"]
 [ext_resource type="PackedScene" uid="uid://cu320w4niwr7l" path="res://scenes/managers/spawn_manager/spawn_manager.tscn" id="4_kmrci"]
 [ext_resource type="PackedScene" uid="uid://dt5hy6ytg3lh" path="res://scenes/managers/road_manager/road_manager.tscn" id="5_1pmqi"]
-[ext_resource type="PackedScene" uid="uid://cp56vfnhiyypd" path="res://scenes/objects/house/house.tscn" id="7_3c4uw"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_kf64e")
@@ -27,7 +26,6 @@ spawn_manager = NodePath("../SpawnManager")
 min_spawn_time = 0.4
 max_spawn_time = 1.0
 house_root = NodePath("../Houses")
-enabled = false
 
 [node name="RoadManager" parent="." instance=ExtResource("5_1pmqi")]
 
@@ -38,9 +36,6 @@ enabled = false
 [node name="Mailboxes" type="Node" parent="."]
 
 [node name="Houses" type="Node" parent="."]
-
-[node name="House" parent="Houses" instance=ExtResource("7_3c4uw")]
-position = Vector2(0, 64)
 
 [node name="PostOffice" parent="." instance=ExtResource("3_amkxi")]
 position = Vector2(448, 256)

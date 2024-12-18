@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func position_to_grid(position: Vector2) -> Vector2i:
-	var grid_position := position / 64
+	var grid_position := position / GameState.tile_size
 	grid_position = grid_position.floor()
 	return grid_position
 
