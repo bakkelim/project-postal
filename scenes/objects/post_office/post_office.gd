@@ -26,6 +26,10 @@ func get_center_position() -> Vector2:
 	return Vector2(x, y)
 
 
+func get_building_cells() -> Array[Vector2i]:
+	return _building_component.get_building_area()
+
+
 func _get_global_positions() -> Array[Vector2]:
 	var global_positions: Array[Vector2] = []
 	global_positions.append_array(house_collection_component.get_global_positions())

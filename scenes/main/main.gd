@@ -5,4 +5,5 @@ extends Node
 
 
 func _ready() -> void:
-	print(road_manager.get_path_between(Vector2i(0, 0), Vector2i(0, 4)))
+	pass
+	#print(road_manager.get_path_between(Vector2i(5, 2), Vector2i(14, 2)))

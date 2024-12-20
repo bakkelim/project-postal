@@ -63,11 +63,11 @@ func _get_tile_positions(start_tile: Vector2i, size: Vector2i) -> Array[Vector2i
 
 func _set_area_as_occupied(positions: Array[Vector2i]) -> void:
 	for p in positions:
-		_set_tile_as_occupied(p)
+		set_tile_as_occupied(p)
 		road_manager.set_occupied_cell(p)
 
 
-func _set_tile_as_occupied(position: Vector2i) -> void:
+func set_tile_as_occupied(position: Vector2i) -> void:
 	occupied_tiles[position] = true
 
 

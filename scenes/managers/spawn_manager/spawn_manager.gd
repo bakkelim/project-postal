@@ -6,6 +6,8 @@ extends Node
 @export var house_root: Node
 @export var enabled: bool = true
 @export var grid_manager: GridManager
+@export var max_num_of_houses := 2
+@export var road_manager: RoadManager
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
@@ -39,10 +41,15 @@ func _spawn_house_at_random_position() -> void:
 		return
 	var instance := House.new_instance(start_tile)
 	house_root.add_child(instance)
+	_create_road(instance)
+
+
+func _create_road(from: House) -> void:
+	road_manager.create_road(from)
 
 
 func _on_spawn_timeout() -> void:
-	if house_root.get_child_count() > 10:
+	if house_root.get_child_count() >= max_num_of_houses:
 		return
 	_spawn_house_at_random_position()
 	_start_timer()
