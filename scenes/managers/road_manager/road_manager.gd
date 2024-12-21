@@ -10,9 +10,9 @@ var _astargrid: AStarGrid2D
 
 func _ready() -> void:
 	_astargrid = AStarGrid2D.new()
-	_astargrid.region = Rect2i(
-		Vector2i.ZERO, Vector2i(1152 / GameState.tile_size, 648 / GameState.tile_size)
-	)
+	var x: int = floor(1152.0 / GameState.tile_size)
+	var y: int = floor(648.0 / GameState.tile_size)
+	_astargrid.region = Rect2i(Vector2i.ZERO, Vector2i(x, y))
 	_astargrid.cell_size = Vector2i(GameState.tile_size, GameState.tile_size)
 	_astargrid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	_astargrid.jumping_enabled = false

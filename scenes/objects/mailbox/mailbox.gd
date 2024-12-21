@@ -52,8 +52,8 @@ func collect_mail() -> Array[Mail]:
 
 
 func get_center_position() -> Vector2:
-	var x := global_position.x + ((GameState.tile_size / 2) * _building_component.dimensions.x)
-	var y := global_position.y + ((GameState.tile_size / 2) * _building_component.dimensions.y)
+	var x := global_position.x + ((GameState.tile_size / 2.0) * _building_component.dimensions.x)
+	var y := global_position.y + ((GameState.tile_size / 2.0) * _building_component.dimensions.y)
 	return Vector2(x, y)
 
 
