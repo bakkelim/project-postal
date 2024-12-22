@@ -9,9 +9,9 @@ var _astargrid: AStarGrid2D
 
 
 func _ready() -> void:
-	_astargrid = AStarGrid2D.new()
 	var x: int = floor(1152.0 / GameState.tile_size)
 	var y: int = floor(648.0 / GameState.tile_size)
+	_astargrid = AStarGrid2D.new()
 	_astargrid.region = Rect2i(Vector2i.ZERO, Vector2i(x, y))
 	_astargrid.cell_size = Vector2i(GameState.tile_size, GameState.tile_size)
 	_astargrid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
@@ -33,9 +33,9 @@ func create_road(from: House) -> void:
 	var from_cell: Vector2i = grid_manager.position_to_grid(from.global_position)
 
 	var path := _find_shortest_path(from_cell)
-	for tile in path:
-		road_tile_map_layer.set_cell(tile, 0, Vector2i.ZERO)
-		grid_manager.set_tile_as_occupied(tile)
+	for c in path:
+		road_tile_map_layer.set_cell(c, 0, Vector2i.ZERO)
+		grid_manager.set_cell_as_occupied(c, GridManager.Type.ROAD)
 
 
 func _get_path_between(from: Vector2i, to: Vector2i) -> Array[Vector2i]:

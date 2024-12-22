@@ -18,7 +18,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not cursor.visible:
 		return
-	var grid_position := grid_manager.get_mouse_tile_position()
+	var grid_position := grid_manager.get_mouse_cell_position()
 	cursor.global_position = grid_position * GameState.tile_size
 
 
@@ -27,10 +27,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if not cursor.visible:
 		return
-	if not grid_manager.is_tile_available(grid_manager.get_mouse_tile_position()):
+	if not grid_manager.is_road_cell(grid_manager.get_mouse_cell_position()):
 		return
 
-	var instance := Mailbox.new_instance(grid_manager.get_mouse_tile_position())
+	var instance := Mailbox.new_instance(grid_manager.get_mouse_cell_position())
 	mailbox_root.add_child(instance)
 	cursor.visible = false
 
