@@ -9,6 +9,28 @@ enum Type { DEFAULT, ROAD }
 var occupied_cells: Dictionary = {}
 
 
+static func position_to_cell(position: Vector2) -> Vector2i:
+	var grid_position := position / GameState.tile_size
+	grid_position = grid_position.floor()
+	return grid_position
+
+
+static func cell_to_position(cell: Vector2i) -> Vector2:
+	var position := Vector2(cell * GameState.tile_size)
+	position.x += GameState.tile_size / 2.0
+	position.y += GameState.tile_size / 2.0
+	return position
+
+
+static func cell_to_cell_area(start_cell: Vector2i, size: Vector2i) -> Array[Vector2i]:
+	var cell_rect := Rect2i(start_cell, size)
+	var cell_area: Array[Vector2i] = []
+	for x in range(cell_rect.position.x, cell_rect.end.x):
+		for y in range(cell_rect.position.y, cell_rect.end.y):
+			cell_area.push_back(Vector2i(x, y))
+	return cell_area
+
+
 func _ready() -> void:
 	GameEvents.building_placed.connect(_on_building_placed)
 

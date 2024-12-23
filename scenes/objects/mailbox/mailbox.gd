@@ -11,20 +11,21 @@ const Scene: PackedScene = preload("res://scenes/objects/mailbox/mailbox.tscn")
 
 var is_full: bool = false
 var is_grabbed: bool
+var road_cell: Vector2i
 
 @onready var pick_up_component: PickUpComponent = $PickUpComponent
 @onready var full_label: Label = $FullLabel
 @onready var _building_component: BuildingComponent = $BuildingComponent
 @onready var _house_collection_component: HouseCollectionComponent = $HouseCollectionComponent
-@onready var _edges_component: EdgesComponent = $EdgesComponent
+#@onready var _edges_component: EdgesComponent = $EdgesComponent
 @onready var _capacity_component: CapacityComponent = $CapacityComponent
 @onready var _coverage_area_component: Area2D = $CoverageAreaComponent
 @onready var _sprite: Sprite2D = $Sprite2D
 
 
-static func new_instance(mouse_tile_position: Vector2i) -> Mailbox:
+static func new_instance(mouse_cell_position: Vector2i) -> Mailbox:
 	var instance: Mailbox = Scene.instantiate()
-	instance.global_position = mouse_tile_position * GameState.tile_size
+	instance.global_position = mouse_cell_position * GameState.tile_size
 	return instance
 
 
@@ -73,14 +74,14 @@ func _capacity_changed() -> void:
 func _on_grabbed() -> void:
 	is_grabbed = true
 	queue_redraw()
-	_edges_component.redraw_edges = true
+	#_edges_component.redraw_edges = true
 	grabbed.emit()
 
 
 func _on_placed() -> void:
 	is_grabbed = false
 	queue_redraw()
-	_edges_component.redraw_edges = false
+	#_edges_component.redraw_edges = false
 	placed.emit()
 
 
@@ -89,7 +90,7 @@ func _on_coverage_area_entered(area: Area2D) -> void:
 		return
 
 	_house_collection_component.add(area)
-	_edges_component.draw_edges(_house_collection_component.get_global_positions())
+	#_edges_component.draw_edges(_house_collection_component.get_global_positions())
 
 
 func _on_coverage_area_exited(area: Area2D) -> void:
@@ -97,4 +98,4 @@ func _on_coverage_area_exited(area: Area2D) -> void:
 		return
 
 	_house_collection_component.remove(area)
-	_edges_component.draw_edges(_house_collection_component.get_global_positions())
+	#_edges_component.draw_edges(_house_collection_component.get_global_positions())

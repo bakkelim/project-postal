@@ -29,6 +29,7 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 houses=""
+road_path_manager=""
 
 [input]
 

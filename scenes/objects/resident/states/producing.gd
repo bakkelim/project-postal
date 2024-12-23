@@ -22,11 +22,11 @@ func exit() -> void:
 
 
 func _on_mail_produced(mail: Mail) -> void:
-	_data.DATA_MAIL = mail
+	_data[DATA_MAIL] = mail
 
 	var selected_mailbox := resident.get_closest_mailbox()
 	if not selected_mailbox:
 		finished.emit(WAITING, _data)
 	else:
-		_data.DATA_SELECTED_MAILBOX = selected_mailbox
+		_data[DATA_SELECTED_MAILBOX] = selected_mailbox
 		finished.emit(WALKING_TO_MAILBOX, _data)

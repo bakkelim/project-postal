@@ -13,8 +13,8 @@ func enter(_previous_state_path: String, data := {}) -> void:
 			postman.mailbox_collection_component.collection_changed.connect(_on_first_added)
 		else:
 			var selected_mailbox: Mailbox = mailboxes_to_visit.pop_back()
-			data.DATA_SELECTED_MAILBOX = selected_mailbox
-			data.DATA_MAILBOXES_TO_VISIT = mailboxes_to_visit
+			data[DATA_SELECTED_MAILBOX] = selected_mailbox
+			data[DATA_MAILBOXES_TO_VISIT] = mailboxes_to_visit
 			finished.emit(WALKING_TO_MAILBOX, data)
 	elif postman.current_task == postman.Tasks.SORTING:
 		finished.emit(SORTING, _data)
@@ -30,6 +30,6 @@ func exit() -> void:
 func _on_first_added() -> void:
 	var mailboxes_to_visit := postman.mailbox_collection_component.get_copy()
 	var selected_mailbox: Mailbox = mailboxes_to_visit.pop_back()
-	_data.DATA_SELECTED_MAILBOX = selected_mailbox
-	_data.DATA_MAILBOXES_TO_VISIT = mailboxes_to_visit
+	_data[DATA_SELECTED_MAILBOX] = selected_mailbox
+	_data[DATA_MAILBOXES_TO_VISIT] = mailboxes_to_visit
 	finished.emit(WALKING_TO_MAILBOX, _data)

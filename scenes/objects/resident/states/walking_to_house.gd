@@ -4,12 +4,26 @@ extends ResidentState
 @export var animate_component: AnimateComponent
 
 var _data: Dictionary
+var _path: Array[Vector2i]
 
 
 func enter(_previous_state_path: String, data := {}) -> void:
 	_data = data
 	animate_component.animation_finished.connect(_on_animation_finished)
-	animate_component.start_animation(resident.home.get_center_position())
+
+	var road_path_manager: RoadPathManager = get_tree().get_first_node_in_group("road_path_manager")
+	_path = road_path_manager.get_resident_walking_to_house_path(resident)
+
+	if _path.is_empty():
+		if _data[DATA_MAIL]:
+			finished.emit(WAITING, _data)
+		else:
+			finished.emit(PRODUCING, _data)
+		return
+
+	var cell := _path.pop_front() as Vector2i
+	var position := GridManager.cell_to_position(cell)
+	animate_component.start_animation(position)
 
 
 func exit() -> void:
@@ -18,7 +32,13 @@ func exit() -> void:
 
 
 func _on_animation_finished() -> void:
-	if _data.DATA_MAIL:
-		finished.emit(WAITING, _data)
-	else:
-		finished.emit(PRODUCING, _data)
+	if _path.is_empty():
+		if _data[DATA_MAIL]:
+			finished.emit(WAITING, _data)
+		else:
+			finished.emit(PRODUCING, _data)
+		return
+
+	var cell: Vector2i = _path.pop_front()
+	var position := GridManager.cell_to_position(cell)
+	animate_component.start_animation(position)

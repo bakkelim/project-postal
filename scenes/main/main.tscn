@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bk5agr7vpneyh"]
+[gd_scene load_steps=10 format=3 uid="uid://bk5agr7vpneyh"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_kf64e"]
 [ext_resource type="PackedScene" uid="uid://8vbmvorcaa82" path="res://scenes/ui/build_ui/build_ui.tscn" id="1_t1k2b"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cd3x4amq05w5g" path="res://scenes/managers/building_manager/building_manager.tscn" id="3_bdker"]
 [ext_resource type="PackedScene" uid="uid://cu320w4niwr7l" path="res://scenes/managers/spawn_manager/spawn_manager.tscn" id="4_kmrci"]
 [ext_resource type="PackedScene" uid="uid://dt5hy6ytg3lh" path="res://scenes/managers/road_manager/road_manager.tscn" id="5_1pmqi"]
+[ext_resource type="PackedScene" uid="uid://bvukjlkfihs75" path="res://scenes/managers/road_path_manager/road_path_manager.tscn" id="6_ab1gs"]
 [ext_resource type="TileSet" uid="uid://7uosl83yl72i" path="res://assets/road_tile_set.tres" id="7_o5dxc"]
 
 [node name="Main" type="Node"]
@@ -23,17 +24,20 @@ mailbox_root = NodePath("../Mailboxes")
 house_root = NodePath("../Houses")
 
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("house_root", "grid_manager", "road_manager") instance=ExtResource("4_kmrci")]
-min_spawn_time = 0.4
-max_spawn_time = 1.0
+min_spawn_time = 0.1
+max_spawn_time = 0.1
 house_root = NodePath("../Houses")
 grid_manager = NodePath("../GridManager")
-max_num_of_houses = 30
+max_num_of_houses = 20
 road_manager = NodePath("../RoadManager")
 
-[node name="RoadManager" parent="." node_paths=PackedStringArray("grid_manager", "road_tile_map_layer", "post_office") instance=ExtResource("5_1pmqi")]
+[node name="RoadManager" parent="." node_paths=PackedStringArray("grid_manager", "road_tile_map_layer", "post_office", "road_path_manager") instance=ExtResource("5_1pmqi")]
 grid_manager = NodePath("../GridManager")
 road_tile_map_layer = NodePath("../RoadTileMapLayer")
 post_office = NodePath("../PostOffice")
+road_path_manager = NodePath("../RoadPathManager")
+
+[node name="RoadPathManager" parent="." groups=["road_path_manager"] instance=ExtResource("6_ab1gs")]
 
 [node name="BuildUI" parent="." instance=ExtResource("1_t1k2b")]
 

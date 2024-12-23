@@ -1,6 +1,8 @@
 class_name PostOffice
 extends Area2D
 
+var road_cell: Vector2
+
 @onready var mailbox_collection_component: MailboxCollectionComponent = $MailboxCollectionComponent
 @onready var house_collection_component: HouseCollectionComponent = $HouseCollectionComponent
 @onready var coverage_area_component: InteractionComponent = $CoverageAreaComponent

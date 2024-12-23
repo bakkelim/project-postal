@@ -4,6 +4,7 @@ extends Node
 @export var grid_manager: GridManager
 @export var road_tile_map_layer: TileMapLayer
 @export var post_office: PostOffice
+@export var road_path_manager: RoadPathManager
 
 var _astargrid: AStarGrid2D
 
@@ -33,14 +34,12 @@ func create_road(from: House) -> void:
 	var from_cell: Vector2i = grid_manager.position_to_grid(from.global_position)
 
 	var path := _find_shortest_path(from_cell)
+	if not path.is_empty():
+		from.road_cell = path[0]
 	for c in path:
 		road_tile_map_layer.set_cell(c, 0, Vector2i.ZERO)
 		grid_manager.set_cell_as_occupied(c, GridManager.Type.ROAD)
-
-
-func _get_path_between(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
-	var etst := _astargrid.get_id_path(from, to)
-	return etst
+		road_path_manager.set_free_cell(c)
 
 
 func _sort_by_distance_to_destination(
@@ -59,8 +58,7 @@ func _find_shortest_path(from_cell: Vector2i) -> Array[Vector2i]:
 	else:
 		shortest_path = _get_path_to_closest_road_cell(from_cell)
 
-	shortest_path.pop_back()
-	shortest_path.pop_front()
+	shortest_path.erase(from_cell)
 	set_occupied_cell(from_cell)
 	return shortest_path
 
@@ -83,4 +81,9 @@ func _get_path_to_post_office(from_cell: Vector2i) -> Array[Vector2i]:
 	set_free_cell(post_office_cell)
 	var shortest_path := _astargrid.get_id_path(from_cell, post_office_cell)
 	set_occupied_cell(post_office_cell)
+
+	for c in post_office_grids:
+		shortest_path.erase(c)
+
+	post_office.road_cell = shortest_path[shortest_path.size() - 1]
 	return shortest_path

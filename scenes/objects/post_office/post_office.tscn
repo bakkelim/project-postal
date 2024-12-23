@@ -38,7 +38,7 @@ position = Vector2(64, 32)
 shape = SubResource("RectangleShape2D_w71b6")
 
 [node name="Postman" parent="." node_paths=PackedStringArray("mailbox_collection_component") instance=ExtResource("6_x1h2q")]
-position = Vector2(64, 32)
+position = Vector2(32, 32)
 mailbox_collection_component = NodePath("../MailboxCollectionComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

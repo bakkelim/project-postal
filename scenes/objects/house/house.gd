@@ -6,6 +6,7 @@ const Scene: PackedScene = preload("res://scenes/objects/house/house.tscn")
 static var house_counter := 0
 
 var id: String
+var road_cell: Vector2i
 var received_mail_count: int = 0:
 	set(value):
 		received_mail_count = value
@@ -19,9 +20,9 @@ var received_mail_count: int = 0:
 @onready var _sprite: Sprite2D = $Sprite2D
 
 
-static func new_instance(tile_position: Vector2i) -> House:
+static func new_instance(cell_position: Vector2i) -> House:
 	var instance: House = Scene.instantiate()
-	instance.global_position = tile_position * GameState.tile_size
+	instance.global_position = cell_position * GameState.tile_size
 	return instance
 
 

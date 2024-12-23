@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvukjlkfihs75"]
+
+[ext_resource type="Script" path="res://scenes/managers/road_path_manager/road_path_manager.gd" id="1_sqi42"]
+
+[node name="RoadPathManager" type="Node"]
+script = ExtResource("1_sqi42")
