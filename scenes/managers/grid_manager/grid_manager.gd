@@ -106,4 +106,6 @@ func _set_area_as_occupied(positions: Array[Vector2i]) -> void:
 
 func _on_building_placed(building_component: BuildingComponent) -> void:
 	var building_area := building_component.get_building_area()
+	if building_component.owner is Mailbox:
+		return
 	_set_area_as_occupied(building_area)
