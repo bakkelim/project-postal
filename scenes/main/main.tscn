@@ -13,7 +13,7 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_kf64e")
 
-[node name="GridManager" parent="." node_paths=PackedStringArray("highlight_tile_map_layer", "road_manager") instance=ExtResource("2_n2yw8")]
+[node name="GridManager" parent="." node_paths=PackedStringArray("highlight_tile_map_layer", "road_manager") groups=["grid_manager"] instance=ExtResource("2_n2yw8")]
 highlight_tile_map_layer = NodePath("../RoadTileMapLayer")
 road_manager = NodePath("../RoadManager")
 

@@ -30,6 +30,7 @@ window/stretch/mode="canvas_items"
 
 houses=""
 road_path_manager=""
+grid_manager=""
 
 [input]
 

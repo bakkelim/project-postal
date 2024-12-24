@@ -12,8 +12,8 @@ var is_grabbed: bool
 func _physics_process(_delta: float) -> void:
 	if not is_grabbed:
 		return
-	var grid_position := _position_to_grid(sprite.get_global_mouse_position())
-	sprite.owner.global_position = grid_position * GameState.tile_size
+	var cell := GridManager.position_to_cell(owner.get_global_mouse_position())
+	owner.global_position = cell * GameState.tile_size
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -21,6 +21,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if is_grabbed:
+		var grid_manager: GridManager = get_tree().get_first_node_in_group("grid_manager")
+		var cell := GridManager.position_to_cell(owner.get_global_mouse_position())
+		if not grid_manager.is_road_cell(cell):
+			return
 		is_grabbed = false
 		placed.emit()
 		GameState.state = GameState.States.SELECTING
@@ -32,9 +36,3 @@ func _unhandled_input(event: InputEvent) -> void:
 		grabbed.emit()
 		GameState.state = GameState.States.PLACING
 		get_viewport().set_input_as_handled()
-
-
-func _position_to_grid(position: Vector2) -> Vector2i:
-	var grid_position := position / GameState.tile_size
-	grid_position = grid_position.floor()
-	return grid_position
