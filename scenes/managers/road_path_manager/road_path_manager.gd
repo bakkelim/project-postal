@@ -48,6 +48,9 @@ func get_postman_walking_to_post_office_path(postman: Postman) -> Array[Vector2i
 	var post_office_cell := GridManager.position_to_cell(postman.working_place.global_position)
 	var postman_cell := GridManager.position_to_cell(postman.global_position)
 
+	if postman_cell == post_office_cell:
+		return []
+
 	var path := _astargrid.get_id_path(postman_cell, postman.working_place.road_cell)
 	path.append(post_office_cell)
 	return path
